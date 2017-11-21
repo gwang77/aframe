@@ -1,0 +1,89 @@
+<div class="row">
+    <div class="col-lg-12" ng-hide="delegate.id">
+        <h3 class="page-header">
+            <span i18n="acmUIApp.label_delegate_create"/>
+        </h3>
+    </div>
+    <div class="col-lg-12" ng-show="delegate.id">
+        <h3 class="page-header">
+            <span i18n="acmUIApp.label_delegate_edit"/>
+        </h3>
+    </div>
+
+    <div class="col-lg-12">
+        <ic-form-legend/>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <form name="userForm" class="form-horizontal">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ic-form-group>
+                        <div class="col-md-2">
+                            <label class="control-label"><span i18n="acmUIApp.label_delegate_userFrom"/></label>
+                        </div>
+                        <div class="col-md-10">
+                            <label class="control-label"  ng-model="delegate.user_from">{{delegate.user_from}}</label>
+                        </div>
+                    </ic-form-group>
+                    <ic-form-group>
+                        <div class="col-md-2">
+                            <label class="control-label"><span i18n="acmUIApp.label_delegate_dateFrom"/></label>
+                            <ic-required-mark/>
+                        </div>
+                        <div class="col-md-4">
+                            <ic-datetime-picker ng-model="delegate.date_from_s" validator="[required]" validator-group="request"
+                                                format="YYYY/MM/DD" show-today-button="true" show-clear="true" show-close="true" min-date="2000-01-01 13:00:00"
+                                                max-date="2020-12-01 17:30:00" side-by-side="true" keep-open="true"/>
+                        </div>
+                    </ic-form-group>
+
+                    <ic-form-group>
+                        <div class="col-md-2">
+                            <label class="control-label"><span i18n="acmUIApp.label_delegate_dateTo"/></label>
+                            <ic-required-mark/>
+                        </div>
+                        <div class="col-md-4">
+                            <ic-datetime-picker ng-model="delegate.date_to_s" validator="[required]" validator-group="request"
+                                                format="YYYY/MM/DD" show-today-button="true" show-clear="true" show-close="true" min-date="2000-01-01 13:00:00"
+                                                max-date="2020-12-01 17:30:00" side-by-side="true" keep-open="true"/>
+                        </div>
+                    </ic-form-group>
+
+                    <ic-form-group>
+                        <div class="col-md-2">
+                            <label><span i18n="acmUIApp.label_delegate_userTo"/></label>
+                            <ic-required-mark/>
+                        </div>
+                        <div class="col-md-10" ng-hide="delegate.id">
+                            <ic-picklist validator="[required]" validator-group="request" ng-model="data.assignedRole" source-items="data.unassignedRole"/>
+                        </div>
+                        <div class="col-md-4" ng-show="delegate.id">
+                            <ui-select ng-model="delegate.user_to" search-enabled="false"   validator="[required]" validator-group="request">
+                                <ui-select-match>
+                                    {{$select.selected.username}}
+                                </ui-select-match>
+                                <ui-select-choices repeat="user.username as user in user| filter:  $select.search">
+                                    <span ng-bind-html="user.username | highlight: $select.search"></span>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                    </ic-form-group>
+                </div>
+            </div>
+            <br/>
+
+            <div class="row">
+                <div class="col-md-10 col-md-offset-2">
+                    <div class="text-left">
+                        <a class="btn btn-primary" ng-click="actions.submit()" ng-hide="delegate.id"><i class="fa fa-save"></i> <span i18n="aframe.button_save"/></a>&nbsp;&nbsp;
+                        <a class="btn btn-primary" ng-click="actions.submit()" ng-show="delegate.id"><i class="fa fa-save"></i> <span i18n="aframe.button_update"/></a>&nbsp;&nbsp;
+                        <a class="btn btn-warning" ng-click="actions.cancel()"><i class="fa fa-ban"></i> <span i18n="aframe.button_cancel"/></a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

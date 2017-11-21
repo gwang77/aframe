@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sz.internal.common.component.seqno.mapper.SeqNoMapper">
+
+    <resultMap id="ResultMap" type="sz.internal.common.component.seqno.to.SeqNoTO">
+        <id column="key_name" property="key_name"/>
+        <result column="max_id" property="max_id"/>
+        <result column="max_id_desc" property="max_id_desc"/>
+    </resultMap>
+    
+    <insert id="insert" parameterType="sz.internal.common.component.seqno.to.SeqNoTO">
+        insert into tbl_comm_seqno (
+			key_name,
+			max_id,
+			max_id_desc
+        ) values (
+			#{key_name},
+			#{max_id},
+			#{max_id_desc}
+        )
+    </insert>
+
+    <update id="update" parameterType="sz.internal.common.component.seqno.to.SeqNoTO">
+        update tbl_comm_seqno set
+			max_id = #{max_id},
+			max_id_desc = #{max_id_desc}
+		where
+			key_name = #{key_name}
+    </update>
+
+    <delete id="delete" parameterType="sz.internal.common.component.seqno.to.SeqNoTO">
+        delete from tbl_comm_seqno
+        where 
+			key_name = #{key_name}
+	</delete>
+
+    <select id="search" parameterType="sz.internal.common.component.seqno.to.SeqNoTO" resultMap="ResultMap">
+        <if test="!pagination">
+            SELECT 
+			t.key_name,
+			t.max_id,
+			t.max_id_desc
+        </if>
+        <if test="pagination">
+            SELECT COUNT(1) AS TOTAL_SIZE
+        </if>
+		FROM tbl_comm_seqno t
+       	WHERE 1=1
+		<if test="key_name != null and key_name != ''">
+	    	AND t.key_name = #{key_name}
+		</if>
+		<if test="max_id != null">
+	    	AND t.max_id = #{max_id}
+		</if>
+		<if test="max_id_desc != null and max_id_desc != ''">
+	    	AND t.max_id_desc = #{max_id_desc}
+		</if>
+        <if test="!pagination">
+            <if test="null!=sortBy and ''!=sortBy ">
+                ORDER BY ${sortBy}  ${sortType}
+            </if>
+        </if>
+    </select>
+
+    <select id="find" parameterType="sz.internal.common.component.seqno.to.SeqNoTO" resultMap="ResultMap">
+		SELECT 
+			t.key_name,
+			t.max_id,
+			t.max_id_desc
+		FROM tbl_comm_seqno t
+		WHERE 1 = 1 
+		<if test="key_name != null">
+	    	AND t.key_name = #{key_name}
+		</if>
+    </select>
+
+</mapper>

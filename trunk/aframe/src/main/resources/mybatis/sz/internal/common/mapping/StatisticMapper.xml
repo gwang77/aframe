@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sz.internal.common.component.statistic.mapper.StatisticMapper">
+
+    <resultMap id="ResultMap" type="sz.internal.common.component.statistic.to.StatisticTO" extends="sz.internal.common.base.mapper.BaseMapper.BaseResultMap">
+        <result column="item_key" property="item_key"/>
+        <result column="item_desc" property="item_desc"/>
+        <result column="item_count" property="item_count"/>
+        <result column="item_user_count" property="item_user_count"/>
+        <result column="seq_no" property="seq_no"/>
+    </resultMap>
+    
+    <insert id="insert" parameterType="sz.internal.common.component.statistic.to.StatisticTO" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_comm_statistic (
+            id,
+            item_key,
+            item_desc,
+            item_count,
+            item_user_count,
+            seq_no
+        ) values (
+            #{id},
+            #{item_key},
+            #{item_desc},
+            #{item_count},
+            #{item_user_count},
+            #{seq_no}
+        )
+    </insert>
+
+    <update id="update" parameterType="sz.internal.common.component.statistic.to.StatisticTO">
+        update tbl_comm_statistic set 
+            item_key = #{item_key},
+            item_desc = #{item_desc},
+            item_count = #{item_count},
+            item_user_count = #{item_user_count},
+            seq_no = #{seq_no}        where 
+            id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="sz.internal.common.component.statistic.to.StatisticTO">
+        delete from tbl_comm_statistic
+        where 
+            id = #{id}
+    </delete>
+
+    <select id="search" parameterType="sz.internal.common.component.statistic.to.StatisticTO" resultMap="ResultMap">
+        <if test="!pagination">
+            SELECT 
+            t.id,
+            t.item_key,
+            t.item_desc,
+            t.item_count,
+            t.item_user_count,
+            t.seq_no
+        </if>
+        <if test="pagination">
+            SELECT COUNT(1) AS TOTAL_SIZE
+        </if>
+        FROM tbl_comm_statistic t
+           WHERE 1=1
+        <if test="id != null">
+            AND t.id = #{id}
+        </if>
+        <if test="item_key != null and item_key != ''">
+            AND t.item_key = #{item_key}
+        </if>
+        <if test="item_desc != null and item_desc != ''">
+            AND t.item_desc = #{item_desc}
+        </if>
+        <if test="item_count != null">
+            AND t.item_count = #{item_count}
+        </if>
+        <if test="item_user_count != null">
+            AND t.item_user_count = #{item_user_count}
+        </if>
+        <if test="seq_no != null">
+            AND t.seq_no = #{seq_no}
+        </if>
+        <if test="!pagination">
+            <if test="null!=sortBy and ''!=sortBy ">
+                ORDER BY ${sortBy}  ${sortType}
+            </if>
+        </if>
+    </select>
+
+    <select id="find" parameterType="sz.internal.common.component.statistic.to.StatisticTO" resultMap="ResultMap">
+        SELECT 
+            t.id,
+            t.item_key,
+            t.item_desc,
+            t.item_count,
+            t.item_user_count,
+            t.seq_no
+        FROM tbl_comm_statistic t
+        WHERE 1 = 1 
+        <if test="id != null">
+            AND t.id = #{id}
+        </if>
+    </select>
+
+    <update id="increaseCount">
+        update tbl_comm_statistic set
+          item_count = item_count + #{inc_item_count},
+          item_user_count = item_user_count + #{inc_item_user_count}
+        where
+          id = #{id}
+    </update>
+
+    <update id="increaseCountByItemKey">
+        update tbl_comm_statistic set
+          item_count = item_count + #{inc_item_count},
+          item_user_count = item_user_count + #{inc_item_user_count}
+        where
+          item_key = #{item_key}
+    </update>
+
+</mapper>

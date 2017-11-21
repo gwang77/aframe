@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Unknown Error</title>
+    <style>
+        body {
+            padding-top: 20px;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var display = document.getElementById("display-domain");
+            display.innerHTML = document.domain;
+        });
+    </script>
+</head>
+<body>
+<!-- Error Page Content -->
+<div class="container">
+    <div class="jumbotron">
+        <h1><i class="fa fa-ban red"></i> Unknown Error</h1>
+        <p class="lead">Unknown Error <em><span id="display-domain"></span></em>.</p>
+        <p><a onclick="javascript:checkSite();" class="btn btn-default">Take Me To The Homepage</a>
+            <script type="text/javascript">
+                function checkSite(){
+                    var currentSite = window.location.origin;
+                    window.location = currentSite + '/#/main/home';
+                }
+            </script>
+        </p>
+    </div>
+</div>
+</body>
+</html>

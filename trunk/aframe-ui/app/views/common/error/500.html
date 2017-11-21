@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>500 Internal Server Error</title>
+    <style>
+        body {
+            padding-top: 20px;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var display = document.getElementById("display-domain");
+            display.innerHTML = document.domain;
+        });
+    </script>
+</head>
+<body>
+<div class="container">
+    <div class="jumbotron">
+        <h1><span class="glyphicon glyphicon-fire red"></span> 500 Internal Server Error</h1>
+        <p class="lead">The web server is returning an internal error for <em><span id="display-domain"></span></em>.</p>
+        <a href="javascript:document.location.reload(true);" class="btn btn-default">Try This Page Again</a>
+    </div>
+</div>
+</body>
+</html>

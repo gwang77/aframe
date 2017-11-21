@@ -1,0 +1,88 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">
+            <span i18n="aframeUIApp.label_code_codeint_create_title"/>
+        </h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <form name="codeIntForm" class="form-horizontal">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ic-form-group>
+                        <div class="col-md-2">
+                            <label class="control-label"><span i18n="aframeUIApp.label_codetype_id"/></label>
+                        </div>
+                        <div class="col-md-4" style="margin-top: 6px;">
+                            {{codeInt.codetype_id}}
+                        </div>
+                    </ic-form-group>
+                    <ic-form-group>
+                        <div class="col-md-2">
+                            <label class="control-label"><span i18n="aframeUIApp.label_codeint_id"/></label>
+                            <ic-required-mark/>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" ic-input-clear class="form-control" ng-model="codeInt.code_id"
+                                   validator="[id]" validator-group="codeInt"/>
+                        </div>
+                    </ic-form-group>
+                    <ic-form-group>
+                        <div class="col-md-2">
+                            <label class="control-label"><span i18n="aframeUIApp.label_codeint_desc"/></label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" ic-input-clear class="form-control" ng-model="codeInt.code_desc"/>
+                        </div>
+                    </ic-form-group>
+                    <ic-form-group>
+                        <div class="col-md-2">
+                            <label class="control-label"><span i18n="aframeUIApp.label_codeint_status"/></label>
+                        </div>
+                        <div class="col-md-10">
+                            <label class="radio-inline" ng-repeat="x in A_or_N">
+                                <input type="radio" ng-model="codeInt.status" value="{{x.status}}" checked
+                                       validator="[required]" validator-group="codeInt">{{x.describe}}
+                            </label>
+                        </div>
+                    </ic-form-group>
+                    <ic-form-group>
+                        <div class="col-md-2">
+                            <label class="control-label"><span i18n="aframeUIApp.label_codeint_locales"/></label>
+                        </div>
+                        <div class="col-md-10">
+                            <label class="radio-inline" ng-repeat="x in en_or_zh">
+                                <input type="radio" ng-model="codeInt.locales" value="{{x.locales}}" checked
+                                       validator="[required]" validator-group="codeInt">{{x.describe}}
+                            </label>
+                        </div>
+                    </ic-form-group>
+                    <ic-form-group>
+                        <div class="col-md-2">
+                            <label class="control-label"><span i18n="aframeUIApp.label_codeint_seq"/></label>
+                            <ic-required-mark/>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" ic-input-clear class="form-control" ng-model="codeInt.code_seq"
+                                   validator="[naturalNumber]" validator-group="codeInt" maxlength="4" />
+                        </div>
+                    </ic-form-group>
+                </div>
+            </div>
+            <br/>
+
+            <div class="row">
+                <div class="col-md-10 col-md-offset-2">
+                    <div class="text-left">
+                        <a class="btn btn-primary" ng-click="actions.submit()"><i class="fa fa-save"></i> <span
+                                i18n="aframe.button_save"/></a>&nbsp;&nbsp;
+                        <a class="btn btn-warning" ng-click="actions.cancel()"><i class="fa fa-ban"></i> <span
+                                i18n="aframe.button_cancel"/></a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sz.internal.acm.mapper.UserRoleMapper">
+
+    <resultMap id="ResultMap" type="sz.internal.acm.to.UserRoleTO" extends="sz.internal.common.base.mapper.BaseMapper.BaseResultMap">
+        <result column="user_id" property="user_id"/>
+        <result column="role_id" property="role_id"/>
+    </resultMap>
+    
+    <insert id="insert" parameterType="sz.internal.acm.to.UserRoleTO" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_acm_user_role (
+			id,
+			user_id,
+			role_id,
+			create_by,
+			create_dt,
+			update_by,
+			update_dt
+        ) values (
+			#{id},
+			#{user_id},
+			#{role_id},
+			#{create_by},
+			#{create_dt,jdbcType=TIMESTAMP},
+			#{update_by},
+			#{update_dt,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <update id="update" parameterType="sz.internal.acm.to.UserRoleTO">
+        update tbl_acm_user_role set 
+			user_id = #{user_id},
+			role_id = #{role_id},
+			create_by = #{create_by},
+			create_dt = #{create_dt,jdbcType=TIMESTAMP},
+			update_by = #{update_by},
+			update_dt = #{update_dt,jdbcType=TIMESTAMP},
+			version = version + 1
+        where 
+			id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="sz.internal.acm.to.UserRoleTO">
+        delete from tbl_acm_user_role
+        where 
+			id = #{id}
+	</delete>
+
+	<delete id="deleteByUserId">
+		delete from tbl_acm_user_role
+		where 1=1
+		<if test="user_id != null">
+			AND user_id = #{user_id}
+		</if>
+		<if test="app_id != null and app_id != ''">
+			AND exists (select * from tbl_acm_role m where role_id = m.id and m.app_id = #{app_id})
+		</if>
+	</delete>
+
+    <select id="search" parameterType="sz.internal.acm.to.UserRoleTO" resultMap="ResultMap">
+        <if test="!pagination">
+            SELECT 
+			t.id,
+			t.user_id,
+			t.role_id,
+			t.create_by,
+			t.create_dt,
+			t.update_by,
+			t.update_dt,
+			t.version
+        </if>
+        <if test="pagination">
+            SELECT COUNT(1) AS TOTAL_SIZE
+        </if>
+		FROM tbl_acm_user_role t
+       	WHERE 1=1
+		<if test="id != null">
+	    	AND t.id = #{id}
+		</if>
+		<if test="user_id != null">
+	    	AND t.user_id = #{user_id}
+		</if>
+		<if test="role_id != null">
+	    	AND t.role_id = #{role_id}
+		</if>
+		<if test="app_id != null and app_id != ''">
+	    	AND exists (select * from tbl_acm_role m where t.role_id = m.id and m.app_id = #{app_id})
+		</if>
+		<if test="create_by != null and create_by != ''">
+	    	AND t.create_by = #{create_by}
+		</if>
+		<if test="create_dt != null">
+	    	AND t.create_dt = #{create_dt,jdbcType=TIMESTAMP}
+		</if>
+		<if test="update_by != null and update_by != ''">
+	    	AND t.update_by = #{update_by}
+		</if>
+		<if test="update_dt != null">
+	    	AND t.update_dt = #{update_dt,jdbcType=TIMESTAMP}
+		</if>
+		<if test="version != null">
+	    	AND t.version = #{version}
+		</if>
+        <if test="!pagination">
+            <if test="null!=sortBy and ''!=sortBy ">
+                ORDER BY ${sortBy}  ${sortType}
+            </if>
+        </if>
+    </select>
+
+    <select id="find" parameterType="sz.internal.acm.to.UserRoleTO" resultMap="ResultMap">
+		SELECT 
+			t.id,
+			t.user_id,
+			t.role_id,
+			t.create_by,
+			t.create_dt,
+			t.update_by,
+			t.update_dt,
+			t.version
+		FROM tbl_acm_user_role t
+		WHERE 1 = 1 
+		<if test="id != null">
+	    	AND t.id = #{id}
+		</if>
+    </select>
+
+</mapper>

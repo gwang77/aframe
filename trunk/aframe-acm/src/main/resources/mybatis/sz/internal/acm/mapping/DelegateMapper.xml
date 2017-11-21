@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sz.internal.acm.mapper.DelegateMapper">
+
+    <resultMap id="ResultMap" type="sz.internal.acm.to.DelegateTO" extends="sz.internal.common.base.mapper.BaseMapper.BaseResultMap">
+        <result column="user_from" property="user_from"/>
+        <result column="user_to" property="user_to"/>
+        <result column="date_from" property="date_from"/>
+        <result column="date_to" property="date_to"/>
+    </resultMap>
+    
+    <insert id="insert" parameterType="sz.internal.acm.to.DelegateTO" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_acm_delegate (
+			id,
+			user_from,
+			user_to,
+			date_from,
+			date_to,
+			create_by,
+			create_dt,
+			update_by,
+			update_dt
+        ) values (
+			#{id},
+			#{user_from},
+			#{user_to},
+			#{date_from},
+			#{date_to},
+			#{create_by},
+			#{create_dt,jdbcType=TIMESTAMP},
+			#{update_by},
+			#{update_dt,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <update id="update" parameterType="sz.internal.acm.to.DelegateTO">
+        update tbl_acm_delegate set 
+			user_from = #{user_from},
+			user_to = #{user_to},
+			date_from = #{date_from},
+			date_to = #{date_to},
+			create_by = #{create_by},
+			create_dt = #{create_dt,jdbcType=TIMESTAMP},
+			update_by = #{update_by},
+			update_dt = #{update_dt,jdbcType=TIMESTAMP}
+        where 
+			id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="sz.internal.acm.to.DelegateTO">
+        delete from tbl_acm_delegate
+        where 
+			id = #{id}
+	</delete>
+
+    <select id="search" parameterType="sz.internal.acm.to.DelegateTO" resultMap="ResultMap">
+        <if test="!pagination">
+            SELECT 
+			t.id,
+			t.user_from,
+			t.user_to,
+			t.date_from,
+			t.date_to,
+			t.create_by,
+			t.create_dt,
+			t.update_by,
+			t.update_dt,
+			t.version
+        </if>
+        <if test="pagination">
+            SELECT COUNT(1) AS TOTAL_SIZE
+        </if>
+		FROM tbl_acm_delegate t
+       	WHERE 1=1
+		<if test="id != null">
+	    	AND t.id = #{id}
+		</if>
+		<if test="user_from != null and user_from != ''">
+	    	AND t.user_from = #{user_from}
+		</if>
+		<if test="user_to != null and user_to != ''">
+	    	AND t.user_to = #{user_to}
+		</if>
+		<if test="date_from != null and date_from != ''">
+	    	AND t.date_from = #{date_from}
+		</if>
+		<if test="date_to != null and date_to != ''">
+	    	AND t.date_to = #{date_to}
+		</if>
+		<if test="create_by != null and create_by != ''">
+	    	AND t.create_by = #{create_by}
+		</if>
+		<if test="create_dt != null">
+	    	AND t.create_dt = #{create_dt,jdbcType=TIMESTAMP}
+		</if>
+		<if test="update_by != null and update_by != ''">
+	    	AND t.update_by = #{update_by}
+		</if>
+		<if test="update_dt != null">
+	    	AND t.update_dt = #{update_dt,jdbcType=TIMESTAMP}
+		</if>
+		<if test="version != null">
+	    	AND t.version = #{version}
+		</if>
+        <if test="!pagination">
+            <if test="null!=sortBy and ''!=sortBy ">
+                ORDER BY ${sortBy}  ${sortType}
+            </if>
+        </if>
+    </select>
+
+    <select id="find" parameterType="sz.internal.acm.to.DelegateTO" resultMap="ResultMap">
+		SELECT 
+			t.id,
+			t.user_from,
+			t.user_to,
+			t.date_from,
+			t.date_to,
+			t.create_by,
+			t.create_dt,
+			t.update_by,
+			t.update_dt,
+			t.version
+		FROM tbl_acm_delegate t
+		WHERE 1 = 1 
+		<if test="id != null">
+	    	AND t.id = #{id}
+		</if>
+    </select>
+
+</mapper>

@@ -1,0 +1,89 @@
+<html>
+<head>
+    <link rel="stylesheet" href="js/plugin/webuploader/webuploader.css">
+    <script type="text/javascript" src="js/plugin/jquery/jquery-1.10.2.min.js"></script>
+    <script src="js/plugin/webuploader/webuploader.min.js"></script>
+
+</head>
+<body>
+<div >
+    <span id="picker">上传</span>
+</div>
+<script type="text/javascript">
+    var upload = function(picker,acceptTitle,acceptExtensions,acceptMimeTypes,maxSize){
+        console.log("initWebUploader");
+        if(!acceptTitle){
+            acceptTitle = "Images"
+        }
+        if(!acceptExtensions){
+            acceptExtensions = "jpg,png"
+        }
+        if(!acceptMimeTypes){
+            acceptMimeTypes = "image/*"
+        }
+        if(!maxSize){
+            maxSize= 200*1024;
+        }
+        var accept= {
+            title:acceptTitle,
+            extensions: acceptExtensions,
+            mimeTypes: acceptMimeTypes
+        };
+
+        var obj = WebUploader.create({
+            pick: "#"+picker,
+            //server: 'http://d.apicloud.com/mcm/api/file',
+            server: 'http://localhost:8081/fileservice/file/upload',
+            resize: false,
+            fileSingleSizeLimit:maxSize,
+            accept: accept,
+            auto: true
+        });
+        obj.on("fileQueued", function (file) {
+            obj.option('formData', {
+                filename: file.name,
+                type: file.type
+            });
+
+        });
+        //文件上传成功
+        obj.on('uploadSuccess', function (file, res) {
+            console.log("uploadSuccess"+JSON.stringify(res));
+
+        });
+        //文件上传失败
+        obj.on('uploadError', function (file, reason) {
+            console.log("uploadError>>>"+JSON.stringify(reason));
+        });
+        //上传完成，不管成功失败
+        obj.on('uploadComplete', function (file) {
+            console.log("uploadComplete>>>");
+            obj.removeFile(file);
+        });
+        //obj.on('uploadBeforeSend', function (block, data, headers) {
+        //    headers["X-APICloud-AppKey"] = appKey;
+        //    headers["X-APICloud-AppId"] = appId;
+        //});
+        //上传中
+        obj.on('uploadProgress',function(file,percentage){
+            console.log(percentage);
+        });
+        obj.on("error",function (type){
+            if (type=="Q_TYPE_DENIED"){
+                alert("请上传"+accept.extensions+"格式文件");
+            }else if(type=="F_EXCEED_SIZE"){
+                if(maxSize>=1*1024*1024){
+                    var size = (maxSize/1024)/1024;
+                    alert("文件大小不能超过"+size+"M");
+                }else{
+                    var size = (maxSize/1024);
+                    alert("文件大小不能超过"+size+"KB");
+                }
+
+            }
+        });
+    }
+    upload('picker');
+</script>
+</body>
+</html>

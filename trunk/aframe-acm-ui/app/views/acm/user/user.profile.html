@@ -1,0 +1,109 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">
+            <span ng-show="user.id" i18n="acmUIApp.label_edit_User" />
+            <span ng-hide="user.id" i18n="acmUIApp.label_create_user" />
+        </h3>
+    </div>
+
+    <div class="col-lg-12"><ic-form-legend /></div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <form name="userForm" class="form-horizontal">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ic-form-group>
+                        <div class="col-md-2">
+                            <label class="control-label"><span i18n="acmUIApp.label_user_username"/></label> <ic-required-mark />
+                        </div>
+                        <div class="col-md-10">
+                            <input type="text" ic-input-clear class="form-control" ng-model="user.username" validator="[required]" validator-group="user"/>
+                        </div>
+                    </ic-form-group>
+                    <ic-form-group>
+                        <div class="col-md-2">
+                            <label class="control-label"><span i18n="acmUIApp.label_user_realname"/></label>
+                        </div>
+                        <div class="col-md-10">
+                            <input type="text" ic-input-clear class="form-control" ng-model="user.realname"/>
+                        </div>
+                    </ic-form-group>
+                    <ic-form-group>
+                        <div class="col-md-2">
+                            <label class="control-label"><span i18n="acmUIApp.label_user_staff_id"/></label>
+                        </div>
+                        <div class="col-md-10">
+                            <input type="text" ic-input-clear class="form-control" ng-model="user.staff_id"/>
+                        </div>
+                    </ic-form-group>
+                    <ic-form-group>
+                        <div class="col-md-2">
+                            <label class="control-label"><span i18n="acmUIApp.label_user_id_number"/></label>
+                        </div>
+                        <div class="col-md-10">
+                            <input type="text" ic-input-clear class="form-control" ng-model="user.id_number"/>
+                        </div>
+                    </ic-form-group>
+                    <ic-form-group>
+                        <div class="col-md-2">
+                            <label class="control-label"><span i18n="acmUIApp.label_user_sex"/></label>
+                        </div>
+                        <div class="col-md-10">
+                            <label class="radio-inline" ng-repeat="code_item in sex_code">
+                                <input type="radio" ng-model="user.sex" value="{{code_item.code_id}}" checked>{{code_item.code_desc}}
+                            </label>
+                        </div>
+                    </ic-form-group>
+                    <ic-form-group>
+                        <div class="col-md-2">
+                            <label class="control-label"><span i18n="acmUIApp.label_user_birth_date"/></label>
+                        </div>
+                        <div class="col-md-10">
+                            <ic-datetime-picker ng-model="user.birth_date_s" class="input-medium" uib-tooltip="default"></ic-datetime-picker>
+                        </div>
+                    </ic-form-group>
+                    <ic-form-group>
+                        <div class="col-md-2">
+                            <label class="control-label"><span i18n="acmUIApp.label_user_tel"/></label>
+                        </div>
+                        <div class="col-md-10">
+                            <input type="text" ic-input-clear class="form-control" ng-model="user.tel"/>
+                        </div>
+                    </ic-form-group>
+                    <ic-form-group>
+                        <div class="col-md-2">
+                            <label class="control-label"><span i18n="acmUIApp.label_user_email"/></label>
+                        </div>
+                        <div class="col-md-10">
+                            <input type="text" ic-input-clear class="form-control" ng-model="user.email"/>
+                        </div>
+                    </ic-form-group>
+                    <ic-form-group>
+                        <div class="col-md-2">
+                            <label class="control-label"><span i18n="acmUIApp.label_user_locked"/></label>
+                        </div>
+                        <div class="col-md-10">
+                            <label class="radio-inline" ng-repeat="code_item in yes_no_code">
+                                <input type="radio" ng-model="user.locked" value="{{code_item.code_id}}" checked>{{code_item.code_desc}}
+                            </label>
+                        </div>
+                    </ic-form-group>
+                </div>
+            </div>
+            <br/>
+
+            <div class="row">
+                <div class="col-md-10 col-md-offset-2">
+                    <div class="text-left">
+                        <a class="btn btn-primary" ng-click="actions.submit()" ng-show="user.id"><i class="fa fa-save"></i> <span i18n="aframe.button_update"/></a>
+                        <a class="btn btn-primary" ng-click="actions.submit()" ng-hide="user.id"><i class="fa fa-save"></i> <span i18n="aframe.button_save"/></a>&nbsp;&nbsp;
+                        <a class="btn btn-info" ng-click="actions.reset()"><i class="fa fa-reply"></i> <span i18n="aframe.button_reset"/></a>&nbsp;&nbsp;
+                        <a class="btn btn-warning" ng-click="actions.cancel()"><i class="fa fa-ban"></i> <span i18n="aframe.button_cancel"/></a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

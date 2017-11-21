@@ -1,0 +1,8 @@
+SET UI_COMPILE_PARAM_APP=exam
+SET UI_COMPILE_PARAM_ENV=prd
+IF NOT "%1"=="" set UI_COMPILE_PARAM_APP=%1
+IF NOT "%2"=="" set UI_COMPILE_PARAM_ENV=%2
+
+cd aframe-ui
+call xsm app build:%UI_COMPILE_PARAM_APP%:%UI_COMPILE_PARAM_ENV%
+cd..

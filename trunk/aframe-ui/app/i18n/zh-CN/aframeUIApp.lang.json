@@ -1,0 +1,63 @@
+{
+  "button_download":"导出记录",
+
+  "welcome": "欢迎, %name",
+  "label_options":"操作",
+
+  "label_menu_error_page": "错误页面",
+  "label_menu_home": "首页",
+
+  "label_menu_menu": "菜单",
+  "label_maintain_menu": "菜单维护",
+  "label_create_menu": "新建菜单",
+  "label_edit_menu": "修改菜单",
+
+  "label_menu_caption" : "名称",
+  "label_menu_style" : "风格",
+  "label_menu_url" : "URL",
+  "label_menu_permission" : "权限",
+  "label_menu_available" : "有效",
+  "label_menu_seq_no" : "序号",
+  "label_menu_parent_id" : "父节点ID",
+
+  "label_last_blank":"",
+
+  "label_menu_code": "类型",
+  "label_menu_code_codetype": "分类",
+  "label_menu_code_codeint": "类型详细",
+
+  "label_code_codetype_title": "分类列表",
+  "label_code_codeInt_title": "类型详细列表",
+
+  "label_operation": "操作",
+
+  "label_codetype_id": "分类Id",
+  "label_codetype_desc": "分类描述",
+  "label_codeint_id": "类型详细Id",
+  "label_codeint_desc": "类型详细描述",
+  "label_codeint_status": "状态",
+  "label_codeint_locales": "本地",
+  "label_codeint_seq": "序号",
+
+  "label_code_codetype_update_title": "更新分类",
+  "label_code_codetype_create_title": "创建分类",
+  "label_code_codeint_update_title": "更新类型详细",
+  "label_code_codeint_create_title": "创建类型详细",
+
+  "label_menu_audit_log": "Audit Log",
+  "label_object_name":"Object name",
+  "label_action":"Action",
+  "label_audit_date":"Audit Date",
+  "label_before":"Before",
+  "label_after":"After",
+  "label_detail":"Detail",
+  "label_object_field":"Field",
+  "label_from":"From",
+  "label_to":"To",
+
+  "label_statistic_statistic":"访问统计",
+  "label_statistic_statisticManage":"访问管理",
+  "label_statistic_desc":"功能",
+  "label_statistic_count":"访问次数",
+  "label_statistic_countUser":"访问人数"
+}

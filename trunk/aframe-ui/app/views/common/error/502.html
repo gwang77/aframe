@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>502 Bad Gateway</title>
+    <style>
+        body {
+            padding-top: 20px;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var display = document.getElementById("display-domain");
+            display.innerHTML = document.domain;
+        });
+    </script>
+</head>
+<body>
+<div class="container">
+    <div class="jumbotron">
+        <h1><i class="fa fa-bolt orange"></i> 502 Bad Gateway</h1>
+        <p class="lead">The web server is returning an unexpected networking error for <em><span id="display-domain"></span></em>.</p>
+        <a href="javascript:document.location.reload(true);" class="btn btn-default">Try This Page Again</a>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,18 @@
+{
+  "author": "zechuan@ncsi.com.cn",
+  "name": "aframe-components-ckeditor",
+  "keywords": [
+    "aframe",
+    "ckeditor"
+  ],
+  "license": "MIT",
+  "ignore": [],
+  "description": "aframe components module - ckeditor.",
+  "version": "0.0.1",
+  "main": "./js/aframe-ckeditor.js",
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "angular": "1.4.6",
+    "ckeditor": "~4.4.6"
+  }
+}

@@ -1,0 +1,80 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">
+            <span ng-show="application.id" i18n="acmUIApp.label_edit_application"/>
+            <span ng-hide="application.id" i18n="acmUIApp.label_create_application"/>
+        </h3>
+    </div>
+
+    <div class="col-lg-12">
+        <ic-form-legend/>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <form name="applicationForm" class="form-horizontal">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ic-form-group>
+                        <div class="col-md-2">
+                            <label class="control-label"><span i18n="acmUIApp.label_application_appId"/></label>
+                            <ic-required-mark/>
+                        </div>
+                        <div class="col-md-10">
+                            <input type="text" ic-input-clear class="form-control" ng-model="application.app_id"
+                                   validator="[required]" validator-group="application"
+                                   maxlength="100"/>
+                        </div>
+                    </ic-form-group>
+                    <ic-form-group>
+                        <div class="col-md-2">
+                            <label class="control-label"><span i18n="acmUIApp.label_application_name"/></label>
+                            <ic-required-mark/>
+                        </div>
+                        <div class="col-md-10">
+                            <input type="text" ic-input-clear class="form-control" ng-model="application.name"
+                                   validator="[required]" validator-group="application"
+                                   maxlength="100"/>
+                        </div>
+                    </ic-form-group>
+                    <ic-form-group>
+                        <div class="col-md-2">
+                            <label class="control-label"><span i18n="acmUIApp.label_application_baseUrl"/></label>
+                        </div>
+                        <div class="col-md-10">
+                            <input type="text" ic-input-clear class="form-control" ng-model="application.base_url"
+                                   maxlength="500"/>
+                        </div>
+                    </ic-form-group>
+                    <ic-form-group>
+                        <div class="col-md-2">
+                            <label class="control-label"><span i18n="acmUIApp.label_application_locked"/></label>
+                        </div>
+                        <div class="col-md-10">
+                            <label class="radio-inline" ng-repeat="code_item in yes_no_code">
+                                <input type="radio" ng-model="application.locked" value="{{code_item.code_id}}" checked>{{code_item.code_desc}}
+                            </label>
+                        </div>
+                    </ic-form-group>
+                </div>
+            </div>
+            <br/>
+
+            <div class="row">
+                <div class="col-md-10 col-md-offset-2">
+                    <div class="text-left">
+                        <a class="btn btn-primary" ng-click="actions.submit()" ng-show="application.id"><i
+                                class="fa fa-save"></i> <span i18n="aframe.button_update"/></a>
+                        <a class="btn btn-primary" ng-click="actions.submit()" ng-hide="application.id"><i
+                                class="fa fa-save"></i> <span i18n="aframe.button_save"/></a>&nbsp;&nbsp;
+                        <a class="btn btn-info" ng-click="actions.reset()"><i class="fa fa-reply"></i> <span
+                                i18n="aframe.button_reset"/></a>&nbsp;&nbsp;
+                        <a class="btn btn-warning" ng-click="actions.cancel()"><i class="fa fa-ban"></i> <span
+                                i18n="aframe.button_cancel"/></a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

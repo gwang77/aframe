@@ -1,0 +1,64 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">
+            <span i18n="acmUIApp.label_user_assign_priv"/>
+        </h3>
+    </div>
+
+    <div class="col-lg-12">
+        <ic-form-legend/>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <form name="userForm" class="form-horizontal">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ic-form-group>
+                        <div class="col-md-2">
+                            <label class="control-label"><span i18n="acmUIApp.label_user_username"/></label>
+                        </div>
+                        <div class="col-md-10">
+                            <label class="control-label">{{data.user.username}}</label>
+                        </div>
+                    </ic-form-group>
+                    <ic-form-group>
+                        <div class="col-md-2">
+                            <label class="control-label"><span i18n="acmUIApp.label_application_appId"/></label>
+                        </div>
+                        <div class="col-md-10">
+                            <ui-select ng-model="curr_app.single" search-enabled="false" ng-change="actions.change_app()">
+                                <ui-select-match>
+                                    {{$select.selected.name}}
+                                </ui-select-match>
+                                <ui-select-choices repeat="app in appList | filter: {app_id: $select.search}">
+                                    <span ng-bind-html="app.name | highlight: $select.search"></span>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                    </ic-form-group>
+                    <ic-form-group>
+                        <div class="col-md-2">
+                            <label><span i18n="acmUIApp.label_user_assign_priv_role_list"/></label>
+                        </div>
+                        <div class="col-md-10">
+                            <ic-picklist ng-model="data.assignedRole" source-items="data.unassignedRole"/>
+                        </div>
+                    </ic-form-group>
+                </div>
+            </div>
+            <br/>
+
+            <div class="row">
+                <div class="col-md-10 col-md-offset-2">
+                    <div class="text-left">
+                        <a class="btn btn-primary" ng-click="actions.submit()"><i class="fa fa-save"></i> <span i18n="aframe.button_save"/></a>&nbsp;&nbsp;
+                        <a class="btn btn-info" ng-click="actions.reset()"><i class="fa fa-reply"></i> <span i18n="aframe.button_reset"/></a>&nbsp;&nbsp;
+                        <a class="btn btn-warning" ng-click="actions.cancel()"><i class="fa fa-ban"></i> <span i18n="aframe.button_cancel"/></a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

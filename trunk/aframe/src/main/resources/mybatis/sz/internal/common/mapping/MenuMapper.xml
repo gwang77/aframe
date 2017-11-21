@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sz.internal.common.component.menu.mapper.MenuMapper">
+
+	<resultMap id="ResultMap" type="sz.internal.common.component.menu.to.MenuTO" extends="sz.internal.common.base.mapper.BaseMapper.BaseResultMap">
+		<result column="caption" property="caption"/>
+		<result column="style" property="style"/>
+		<result column="url" property="url"/>
+		<result column="parent_id" property="parent_id"/>
+		<result column="permission" property="permission"/>
+		<result column="available" property="available"/>
+		<result column="seq_no" property="seq_no"/>
+	</resultMap>
+
+	<insert id="insert" parameterType="sz.internal.common.component.menu.to.MenuTO" useGeneratedKeys="true" keyProperty="id">
+		insert into tbl_comm_menu (
+		id,
+		caption,
+		style,
+		url,
+		permission,
+		available,
+		seq_no,
+		parent_id,
+		create_by,
+		create_dt,
+		update_by,
+		update_dt
+		) values (
+			#{id},
+			#{caption},
+			#{style},
+			#{url},
+			#{permission},
+			#{available},
+			#{seq_no},
+			#{parent_id},
+			#{create_by},
+			#{create_dt,jdbcType=TIMESTAMP},
+			#{update_by},
+			#{update_dt,jdbcType=TIMESTAMP}
+		)
+	</insert>
+
+	<update id="update" parameterType="sz.internal.common.component.menu.to.MenuTO">
+		update tbl_comm_menu set
+			caption = #{caption},
+			style = #{style},
+			url = #{url},
+			permission = #{permission},
+			available = #{available},
+			seq_no = #{seq_no},
+			parent_id = #{parent_id},
+			create_by = #{create_by},
+			create_dt = #{create_dt,jdbcType=TIMESTAMP},
+			update_by = #{update_by},
+			update_dt = #{update_dt,jdbcType=TIMESTAMP},
+			version = version + 1
+		where
+			id = #{id}
+	</update>
+
+	<delete id="delete" parameterType="sz.internal.common.component.menu.to.MenuTO">
+		delete from tbl_comm_menu
+		where
+			id = #{id}
+	</delete>
+
+	<select id="search" parameterType="sz.internal.common.component.menu.to.MenuTO"
+		resultMap="ResultMap">
+		<if test="!pagination">
+			SELECT
+			t.id,
+			t.caption,
+			t.style,
+			t.url,
+			t.permission,
+			t.available,
+			t.seq_no,	
+			t.parent_id,
+			t.create_by,
+			t.create_dt,
+            t.update_by,
+			t.update_dt,
+			t.version
+		</if>
+		<if test="pagination">
+			SELECT COUNT(1) AS TOTAL_SIZE
+		</if>
+		FROM tbl_comm_menu t
+		WHERE 1=1
+		<if test="id != null">
+	    	AND t.id = #{id}
+		</if>
+		<if test="caption != null and caption != ''">
+	    	AND t.caption = #{caption}
+		</if>
+		<if test="style != null and style != ''">
+	    	AND t.style = #{style}
+		</if>
+		<if test="url != null and url != ''">
+			AND t.URL like '%'+REPLACE(REPLACE(REPLACE(REPLACE(#{url},'/','//'),'%','/%'),'_','/_'),'[','/[')+'%' escape '/'
+		</if>
+		<if test="permission != null and permission != ''">
+	    	AND t.permission = #{permission}
+		</if>
+		<if test="available != null and available != ''">
+			AND t.available = #{available}
+		</if>
+		<if test="seq_no != null">
+			AND t.seq_no = #{seq_no}
+		</if>
+		<if test="parent_id != null">
+	    	AND t.parent_id = #{parent_id}
+		</if>
+		<if test="create_by != null and create_by != ''">
+	    	AND t.create_by = #{create_by}
+		</if>
+		<if test="create_dt != null">
+	    	AND t.create_dt = #{create_dt,jdbcType=TIMESTAMP}
+		</if>
+		<if test="update_by != null and update_by != ''">
+	    	AND t.update_by = #{update_by}
+		</if>
+		<if test="update_dt != null">
+	    	AND t.update_dt = #{update_dt,jdbcType=TIMESTAMP}
+		</if>
+		<if test="version != null">
+	    	AND t.version = #{version}
+		</if>
+        <if test="!pagination">
+            <if test="null!=sortBy and ''!=sortBy ">
+                ORDER BY SEQ_NO ASC
+            </if>
+        </if>
+	</select>
+
+	<select id="find" parameterType="sz.internal.common.component.menu.to.MenuTO" resultMap="ResultMap">
+		SELECT
+		t.id,
+		t.caption,
+		t.style,
+		t.url,
+		t.permission,
+		t.available,
+		t.seq_no,	
+		t.parent_id,
+		t.create_by,
+		t.create_dt,
+        t.update_by,
+		t.update_dt,
+		t.version
+		FROM tbl_comm_menu t
+		WHERE 1 = 1
+		<if test="id != null">
+			AND t.id = #{id}
+		</if>
+	</select>
+
+</mapper>

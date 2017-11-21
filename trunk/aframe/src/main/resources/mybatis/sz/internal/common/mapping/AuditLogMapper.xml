@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sz.internal.common.component.auditlog.mapper.AuditLogMapper">
+
+    <resultMap id="ResultMap" type="sz.internal.common.component.auditlog.to.AuditLogTO">
+        <id column="id" property="id"/>
+        <result column="user_name" property="user_name"/>
+        <result column="class_name" property="class_name"/>
+        <result column="action" property="action"/>
+        <result column="audit_date" property="audit_date" jdbcType="DATE" javaType="java.sql.Timestamp"/>
+        <result column="b_img" property="b_img"/>
+        <result column="a_img" property="a_img"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="sz.internal.common.component.auditlog.to.AuditLogTO" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_comm_audit_log (
+            id,
+            user_name,
+            class_name,
+            action,
+            audit_date,
+            b_img,
+            a_img
+        ) values (
+            #{id},
+            #{user_name},
+            #{class_name},
+            #{action},
+            #{audit_date,jdbcType=TIMESTAMP},
+            #{b_img},
+            #{a_img}
+        )
+    </insert>
+
+    <update id="update" parameterType="sz.internal.common.component.auditlog.to.AuditLogTO">
+        update tbl_comm_audit_log set
+            user_name = #{user_name},
+            class_name = #{class_name},
+            action = #{action},
+            audit_date = #{audit_date,jdbcType=TIMESTAMP},
+            b_img = #{b_img},
+            a_img = #{a_img}
+        where
+            id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="sz.internal.common.component.auditlog.to.AuditLogTO">
+        delete from tbl_comm_audit_log
+        where
+          id = #{id}
+    </delete>
+
+    <select id="search" parameterType="sz.internal.common.component.auditlog.to.AuditLogTO" resultMap="ResultMap">
+        SELECT
+        t.id,
+        t.user_name,
+        t.class_name,
+        t.action,
+        t.audit_date,
+        t.b_img,
+        t.a_img
+        FROM tbl_comm_audit_log t
+        WHERE 1=1
+        <if test="id !=null">
+            AND t.id= #{id}
+        </if>
+        <if test="user_name !=null">
+            AND t.user_name= #{user_name}
+        </if>
+        <if test="class_name !=null">
+            AND t.class_name= #{class_name}
+        </if>
+        <if test="class_nameLike !=null">
+            AND t.class_name like "%"#{class_nameLike}"%"
+        </if>
+        <if test="action != null">
+            AND t.action = #{action}
+        </if>
+        <if test="actionLike != null">
+            AND t.action like "%"#{actionLike}"%"
+        </if>
+        <if test="audit_date != null">
+            AND t.audit_date= #{audit_date}
+        </if>
+        <if test="start_date != null">
+            AND t.audit_date &gt;= #{start_date}
+        </if>
+        <if test="end_date != null">
+            AND t.audit_date &lt;= DATE(DATE_ADD(#{end_date},INTERVAL 1 DAY))
+        </if>
+        <if test="b_img != null">
+            AND t.b_img = #{b_img}
+        </if>
+        <if test="a_img != null">
+            AND t.a_img = #{a_img}
+        </if>
+        <if test="!pagination">
+            <if test="null!=sortBy and ''!=sortBy ">
+                ORDER BY ${sortBy} ${sortType}
+            </if>
+        </if>
+    </select>
+
+    <select id="find" parameterType="sz.internal.common.component.auditlog.to.AuditLogTO" resultMap="ResultMap">
+        SELECT
+        t.id,
+        t.user_name,
+        t.class_name,
+        t.action,
+        t.audit_date,
+        t.b_img,
+        t.a_img
+        FROM tbl_comm_audit_log t
+        WHERE 1 = 1
+        <if test="id != null">
+            AND t.id = #{id}
+        </if>
+    </select>
+
+</mapper>

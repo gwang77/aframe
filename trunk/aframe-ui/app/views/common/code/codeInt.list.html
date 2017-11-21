@@ -1,0 +1,76 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header"><span i18n="aframeUIApp.label_code_codeInt_title"/></h3>
+    </div>
+</div>
+
+
+
+<div class="col-md-2">
+    <ui-select ng-model="codeIntTO.codetype_id" search-enabled="false" ng-change="actions.changeCondition()">
+        <ui-select-match>
+            {{codeIntTO.codetype_id}}
+        </ui-select-match>
+        <ui-select-choices repeat="x.codetype_id as x in codeTypeList | filter: $select.search">
+            <span ng-bind-html="x.codetype_id | highlight: $select.search"></span>
+        </ui-select-choices>
+    </ui-select>
+</div>
+
+<ic-form-group>
+    <div class="col-md-2">
+        <label class="radio-inline" ng-repeat="x in en_or_zh" >
+            <input type="radio" ng-model="codeIntTO.locales" value="{{x.locales}}" checked
+                   validator="[required]" validator-group="codeInt" ng-change="actions.changeCondition()">{{x.describe}}
+        </label>
+    </div>
+</ic-form-group>
+
+<div>
+    <a class="btn btn-primary" ui-sref="layout.code-codeInt-create({codetype_id: codeIntTO.codetype_id, locales: codeIntTO.locales})"><i
+            class="fa fa-plus"></i>
+        <span i18n="aframe.button_create"/></a>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">&nbsp;
+        <table class="table table-striped table-bordered table-hover dataTable" id="codeIntTable"
+               style="margin-bottom: 0 !important;">
+            <thead>
+            <tr>
+                <th style="width: 5%" class="text-center"><span i18n="aframe.msg_pagination_sn"/></th>
+                <th style="width: 10%" class="text-center"><span i18n="aframeUIApp.label_codeint_id"/></th>
+                <th style="width: 10%" class="text-center"><span i18n="aframeUIApp.label_codeint_desc"/></th>
+                <th style="width: 10%" class="text-center"><span i18n="aframeUIApp.label_codeint_status"/></th>
+                <th style="width: 10%" class="text-center"><span i18n="aframeUIApp.label_codeint_locales"/></th>
+                <th style="width: 10%" class="text-center"><span i18n="aframeUIApp.label_codeint_seq"/></th>
+                <th style="width: 10%" class="text-center"><span i18n="aframeUIApp.label_operation"/></th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr ng-repeat="codeInt in codeIntList">
+                <td class="text-center">{{$index + 1}}</td>
+                <td class="hidden-sm hidden-xs">{{codeInt.code_id}}</td>
+                <td class="hidden-sm hidden-xs">{{codeInt.code_desc}}</td>
+                <td class="hidden-sm hidden-xs">{{codeInt.status_code.label | icCodeI18n}}</td>
+                <td class="hidden-sm hidden-xs">{{codeInt.locales_code.label | icCodeI18n}}</td>
+                <td class="hidden-sm hidden-xs">{{codeInt.code_seq}}</td>
+                <td class="text-center">
+                    <button class="btn btn-primary btn-xs"
+                            ui-sref="layout.code-codeInt-update({code_id: codeInt.code_id, locales: codeInt.locales, codetype_id: codeInt.codetype_id})">
+                        <i class="fa fa-edit"></i> <span i18n="aframe.button_edit"/>
+                    </button>
+                    <button class="btn btn-danger btn-xs"
+                            ng-click="actions.delete(codeInt.code_id, codeInt.locales, codeInt.codetype_id)">
+                        <i class="fa fa-times"></i><span i18n="aframe.button_delete"/>
+                    </button>
+                </td>
+            </tr>
+            <tr ng-show="codeIntList.length <= 0">
+                <td colspan="9"><span i18n="aframe.msg_no_matching_records"/></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

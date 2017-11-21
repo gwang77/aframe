@@ -1,0 +1,229 @@
+/*code*/
+.table-code tr td:nth-child(1){width: 21%;}
+.table-code tr td:nth-child(2){width: 18.153%;}
+.table-code tr td:nth-child(3){width: 11%;}
+.table-code tr td:nth-child(4){width: 8.083%;}
+.table-code tr td:nth-child(5){width: 12%;}
+.table-code tr td:nth-child(6){width: 27%;}
+/*code type*/
+.table-codetype tr td:nth-child(1){width: 20%;}
+.table-codetype tr td:nth-child(2){width: 20%;}
+.table-codetype tr td:nth-child(3){width: 30%;}
+/*audit log*/
+.table-auditlog tr td:nth-child(1){width: 20%;}
+.table-auditlog tr td:nth-child(2){width: 8%;}
+.table-auditlog tr td:nth-child(3){width: 12%;}
+.table-auditlog tr td:nth-child(4){width: 30%;}
+.table-auditlog tr td:nth-child(4){width: 30%;}
+/*menu*/
+.table-menu tr td:nth-child(1){width: 16%;}
+.table-menu tr td:nth-child(2){width: 10%;}
+.table-menu tr td:nth-child(3){width: 22%;}
+.table-menu tr td:nth-child(4){width: 15%;}
+.table-menu tr td:nth-child(5){width: 10%;}
+.table-menu tr td:nth-child(6){width: 8%;}
+.table-menu tr td:nth-child(7){width: 14%;}
+/*table*/
+.table-responsive {
+	padding: 0 15px;
+}
+
+.maintable1 {
+	width: 100%;
+	margin: 5px 0 0 0;
+}
+
+.maintable1, .maintable1 thead, .maintable1 tbody, .maintable1 tr, .maintable1 td {
+	border: none;
+	font-size: 14px;
+	color: #33474f;
+}
+
+.maintable1 thead tr {
+	display: block;
+	width: 100%;
+	font-weight: 600;
+	line-height: 15px;
+	padding: 14px 15px;
+}
+
+.maintable1 thead td {
+	display: inline-block;
+	text-transform: uppercase;
+}
+
+.maintable1 thead td .sort {
+	width: 8px;
+	height: 13px;
+	background: url(../../image/sort.png) no-repeat;
+	border: none;
+	margin-left: 8px;
+}
+
+.maintable1 thead td .sort::before {
+	display: none;
+}
+
+.maintable1>tbody>tr {
+	background: #FFFFFF;
+	width: 100%;
+	/* max-height: 80px; */
+	overflow: hidden;
+	display: block;
+	border-radius: 4px;
+	margin-bottom: 6px;
+	padding: 12px 15px;
+	cursor: pointer;
+}
+
+.maintable1>tbody>tr:hover {
+	padding: 11px 14px;
+	border: 1px solid #c2ced4;
+	box-shadow: 0 0 6px #e1e7ea;
+}
+
+.table-option tr td:nth-child(1) {
+	width: 10%;
+}
+
+.table-option tr td:nth-child(2) {
+	width: 30%;
+}
+
+.table-option tr td:nth-child(3) {
+	width: 40%;
+}
+
+.table-option tr td:nth-child(4) {
+	width: 10%;
+}
+
+.maintable1 tbody td {
+	vertical-align: top;
+	padding-right: 15px;
+	display: inline-block;
+	overflow: hidden;
+	/* max-height: 60px; */
+}
+
+.maintable1 tbody tr td:last-child {
+	padding-right: 0;
+}
+
+.maintable1 tbody td a {
+	line-height: 20px;
+	color: #33474f;
+	text-overflow: ellipsis;
+	width: 100%;
+}
+
+.table-question tr td:nth-child(1){width: 14%;}
+.table-question tr td:nth-child(2){width: 11.153%;}
+.table-question tr td:nth-child(3){width: 11%;}
+.table-question tr td:nth-child(4){width: 8.083%;}
+.table-question tr td:nth-child(5){width: 27%;margin-right: 10px;font-size: 13px;}
+.table-question tr td:nth-child(6){width: 12%;}
+.table-question tr td:nth-child(7){width: 14%;}
+
+.table-question tbody tr td:nth-child(1) {
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.table-question tbody tr td:nth-child(6) {
+	font-size: 20px;
+	font-weight: 500;
+}
+
+.table-question tbody tr td:nth-child(7) {
+	padding-right: 0;
+}
+
+.form-table .table-question td:nth-child(3){width: 10%;}
+.form-table .table-question td:nth-child(5){width: 18%;}
+.form-table .table-question td:nth-child(7){width: 23%;}
+
+.maintable1 td button {
+	height: 30px;
+	min-width: 80px;
+	color: #ffffff;
+	padding: 0 10px;
+	background: #758e98;
+	border: none;
+	font-size: 14px;
+	line-height: 26px;
+	font-weight: normal;
+	text-shadow: none;
+	margin-right: 6px;
+}
+
+.maintable1 td button:hover {
+	background: #556e79;
+	color: #ffffff;
+}
+
+.maintable1 td .btn-delete:hover {
+	background: #e81426;
+}
+
+.maintable1 td .btn-delete {
+	background: #f34763;
+	margin-right: 0;
+}
+
+.maintable1 td .btn-delete span {
+	background: url(../../image/icon-delete.png) no-repeat;
+}
+
+.maintable1 td button span {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	margin-right: 6px;
+	/* 	background: url(../../image/icon-view.png) no-repeat; */
+	margin-bottom: -2px;
+}
+
+.maintable1 td button span::before {
+	display: none;
+}
+
+.imagedelete button {
+	height: 30px;
+	min-width: 80px;
+	color: #ffffff;
+	padding: 0 10px;
+	background: #758e98;
+	border: none;
+	font-size: 14px;
+	line-height: 26px;
+	font-weight: normal;
+	text-shadow: none;
+	margin-right: 6px;
+}
+
+.imagedelete button:hover {
+	background: #556e79;
+	color: #ffffff;
+}
+
+.imagedelete .btn-delete:hover {
+	background: #e81426;
+}
+.imagedelete .btn-delete {
+	background: #f34763;
+	margin-right: 0;
+}
+
+.imagedelete .btn-delete span {
+	background: url(../../image/icon-delete.png) no-repeat;
+}
+
+.imagedelete button span {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	margin-right: 6px;
+	/* 	background: url(../../image/icon-view.png) no-repeat; */
+	margin-bottom: -2px;
+}

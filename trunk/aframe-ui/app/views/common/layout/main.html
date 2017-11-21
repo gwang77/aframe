@@ -1,0 +1,94 @@
+<div id="wrapper">
+    <!-- Top nav bar begin -->
+    <nav class="navbar navbar-default navbar-fixed-top navbar-static-top" role="navigation" style="margin-bottom: 0;">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <notifications-bar class="notifications" closeIcon="fa fa-times"></notifications-bar>
+            <a class="navbar-brand" ui-sref="layout.home">aFrame UI</a>
+        </div>
+        <!-- /.navbar-header -->
+        <ul class="nav navbar-top-links navbar-right text-right">
+            <li>
+                <span data-ic-i18n="welcome" data-name="{{loginName}}"></span>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" ice-dropdown-menu-hover data-toggle="dropdown">
+                    <i class="fa fa-flag fa-fw"></i>
+                    <!--<span class="badge">{{localeLang}}</span>-->
+                    <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu ">
+                    <li ng-class="{'active': localeLang === 'en-US'}">
+                        <a href="#" ng-click="changeLanguage('en-US')"> <img alt="" src="images/flags/us.png"> English</a>
+                    </li>
+                    <li ng-class="{'active': localeLang === 'zh-CN'}">
+                        <a href="#" ng-click="changeLanguage('zh-CN')"> <img alt="" src="images/flags/cn.png"> {{'\u4e2d\u6587'}}</a>
+                    </li>
+                </ul>
+            </li>
+            <!-- /.dropdown -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" ice-dropdown-menu-hover data-toggle="dropdown">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li>
+                        <a href="#" ng-controller="logout.ctrl" ng-click="doLogout()"><i class="fa fa-sign-out fa-fw"></i> <span i18n="aframe.label_logout" /></a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+    </nav>
+    <!-- Top nav bar end -->
+
+    <!-- Left menu begin -->
+    <ic-sidebar menus="menus"></ic-sidebar>
+    <!-- Left menu end -->
+
+    <!-- Main content begin -->
+    <div id="page-wrapper">
+        <div class="row" style="padding-top: 15px;">
+            <div class="col-lg-12">
+                <div ncy-breadcrumb></div>
+                <!--<ol class="breadcrumb">
+                    <li>
+                        <i class="fa fa-home"></i>
+                        <a ui-sref="main.home">Home</a>
+                    </li>
+                    <li><a href="#">2016</a></li>
+                    <li><a href="#">{{'\u4e09\u6708'}}</a></li>
+                </ol>-->
+                <!--<div class="well" ncy-breadcrumb-text="{{ncyBreadcrumbChain}}" ncy-breadcrumb-text-separator=" > "></div>-->
+                <!--<div class="well" ncy-breadcrumb="{{ncyBreadcrumbChain}}" ncy-breadcrumb-text-separator=" > "></div>-->
+            </div>
+        </div>
+        <div ui-view></div>
+
+        <!--<div class="modal fade" id="sessionWarningModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Session Timeout</h4>
+                    </div>
+                    <div class="modal-body">
+                       Your session will be expired in {{$root.sessionTimeoutSeconds}} seconds without your any operation.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Continue</button>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+    </div>
+    <!-- Main content end -->
+</div>

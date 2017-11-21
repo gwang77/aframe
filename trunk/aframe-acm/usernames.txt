@@ -1,0 +1,22 @@
+UserService is a application. Can use it genereate salt and password, then update to DB.
+
+username:admin
+password:123
+salt:80095d795104ee6f1e294c1b3e74fced
+new pwd:269fbe970adce59037528d4836ca0838
+username:honglei
+password:123
+salt:01098a8fd2917a1f8367e1d0f39396b1
+new pwd:51b929477eb3675f021c8e85e7ff656e
+username:test001
+password:123
+salt:2c551afcca13078198895b0e11894f4c
+new pwd:bd63a4fefda73a24ab5c2a339e0073e5
+username:test111
+password:123
+salt:b70a9b9d172c56208b0c20fb881fae73
+new pwd:f8f67012e9f7bc8653a29cf039c21203
+update tbl_acm_users set `password`='269fbe970adce59037528d4836ca0838', salt='80095d795104ee6f1e294c1b3e74fced' where username='admin';
+update tbl_acm_users set `password`='51b929477eb3675f021c8e85e7ff656e', salt='01098a8fd2917a1f8367e1d0f39396b1' where username='honglei';
+update tbl_acm_users set `password`='bd63a4fefda73a24ab5c2a339e0073e5', salt='2c551afcca13078198895b0e11894f4c' where username='test001';
+update tbl_acm_users set `password`='f8f67012e9f7bc8653a29cf039c21203', salt='b70a9b9d172c56208b0c20fb881fae73' where username='test111';

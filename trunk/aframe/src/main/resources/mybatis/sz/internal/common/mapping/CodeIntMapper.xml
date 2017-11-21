@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sz.internal.common.component.code.mapper.CodeIntMapper">
+
+	<resultMap id="ResultMap" type="sz.internal.common.component.code.to.CodeIntTO" extends="sz.internal.common.base.mapper.BaseMapper.BaseResultMap">
+		<result column="CODE_ID" property="code_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result column="CODE_DESC" property="code_desc" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result column="CODETYPE_ID" property="codetype_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result column="CODE_SEQ" property="code_seq" jdbcType="INTEGER" javaType="java.lang.String" />
+		<result column="STATUS" property="status" jdbcType="CHAR" javaType="java.lang.String" />
+		<result column="EDITABLE" property="editable" jdbcType="CHAR" javaType="java.lang.String" />
+		<result column="LOCALE" property="locales" jdbcType="VARCHAR" javaType="java.lang.String" />		
+	</resultMap>
+
+	<select id="search" parameterType="sz.internal.common.component.code.to.CodeIntTO" resultMap="ResultMap" >
+		<if test="!pagination">
+		SELECT
+		t.CODE_ID,
+		t.CODE_DESC,
+		t.CODETYPE_ID,
+		t.STATUS,
+		t.LOCALE,
+		t.CODE_SEQ,
+		t.EDITABLE
+		</if>
+		<if test="pagination">
+			SELECT COUNT(1) AS TOTAL_SIZE
+		</if>
+		FROM tbl_comm_code_int t
+		WHERE 1=1
+		<if test="code_id !=null and code_id !=''">
+			AND t.CODE_ID= #{code_id}
+		</if>
+		<if test="code_desc != null and code_desc !=''">
+			AND t.CODE_DESC = #{code_desc}
+		</if>
+		<if test="codetype_id != null and codetype_id !=''">
+			AND t.CODETYPE_ID = #{codetype_id}
+		</if>
+		<if test="status != null and status !=''">
+			AND t.STATUS = #{status}
+		</if>
+		<if test="locales != null and locales !=''">
+			AND t.LOCALE = #{locales}
+		</if>
+		<if test="code_seq != null ">
+			AND t.CODE_SEQ = #{code_seq}
+		</if>
+		<if test="editable != null and editable!=''">
+			AND t.EDITABLE = #{editable}
+		</if>
+		ORDER BY CODE_SEQ ASC
+		<if test="!pagination">
+			<if test="null!=sortBy and ''!=sortBy ">
+				ORDER BY ${sortBy} ${sortType}
+			</if>
+		</if>
+	</select>
+	<select id="find" parameterType="sz.internal.common.component.code.to.CodeIntTO" resultMap="ResultMap">
+		SELECT
+		t.CODE_ID,
+		t.CODE_DESC,
+		t.CODETYPE_ID,
+		t.STATUS,
+		t.LOCALE,
+		t.CODE_SEQ		
+		FROM tbl_comm_code_int t
+		WHERE 1 = 1
+		<if test="codetype_id !=null">
+			AND t.CODETYPE_ID= #{codetype_id}
+		</if>
+		<if test="code_id !=null">
+			AND t.CODE_ID= #{code_id}
+		</if>
+		<if test="locales !=null">
+			AND t.LOCALE= #{locales}
+		</if>	
+	</select>
+	<insert id="insert" parameterType="sz.internal.common.component.code.to.CodeIntTO" useGeneratedKeys="true" keyProperty="id">
+		insert into tbl_comm_code_int(
+		CODE_ID, 
+        CODE_DESC,
+        CODETYPE_ID,
+        STATUS,
+        LOCALE,
+        CODE_SEQ,
+        EDITABLE
+		) values (
+		#{code_id, jdbcType=VARCHAR},
+		#{code_desc, jdbcType=VARCHAR},
+		#{codetype_id, jdbcType=VARCHAR},
+		#{status, jdbcType=CHAR},
+		#{locales, jdbcType=VARCHAR},
+		#{code_seq, jdbcType=INTEGER},
+		#{editable, jdbcType=VARCHAR}
+		)
+	</insert>
+	<update id="update" parameterType="sz.internal.common.component.code.to.CodeIntTO">
+		update tbl_comm_code_int set
+		CODE_DESC=#{code_desc, jdbcType=VARCHAR},
+		STATUS=#{status, jdbcType=CHAR},
+		LOCALE=#{locales, jdbcType=VARCHAR},
+		CODE_SEQ=#{code_seq,jdbcType=INTEGER}
+		where
+		CODE_ID = #{code_id, jdbcType=INTEGER}
+		AND
+		CODETYPE_ID=#{codetype_id,jdbcType=VARCHAR}
+		AND
+		LOCALE=#{locales, jdbcType=VARCHAR}
+	</update>
+	<delete id="delete" parameterType="sz.internal.common.component.code.to.CodeIntTO">
+		delete from tbl_comm_code_int
+		where
+		CODE_ID = #{code_id, jdbcType=VARCHAR}
+		AND
+		CODETYPE_ID=#{codetype_id,jdbcType=VARCHAR}
+		AND
+		LOCALE=#{locales, jdbcType=VARCHAR}
+	</delete>
+</mapper>

@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sz.internal.acm.mapper.UserMapper">
+
+    <resultMap id="ResultMap" type="sz.internal.acm.to.UserTO" extends="sz.internal.common.base.mapper.BaseMapper.BaseResultMap">
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="salt" property="salt"/>
+        <result column="user_type" property="user_type"/>
+        <result column="realname" property="realname"/>
+        <result column="staff_id" property="staff_id"/>
+        <result column="id_number" property="id_number"/>
+        <result column="sex" property="sex"/>
+        <result column="birth_date" property="birth_date"/>
+        <result column="tel" property="tel"/>
+        <result column="email" property="email"/>
+        <result column="locked" property="locked"/>
+        <result column="register_date" property="register_date"/>
+        <result column="reg_id" property="reg_id"/>
+    </resultMap>
+    
+    <insert id="insert" parameterType="sz.internal.acm.to.UserTO" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_acm_user (
+			id,
+			username,
+			password,
+			salt,
+			user_type,
+			realname,
+			staff_id,
+			id_number,
+			sex,
+			birth_date,
+			tel,
+			email,
+			locked,
+            register_date,
+			reg_id,
+			create_by,
+			create_dt,
+			update_by,
+			update_dt
+        ) values (
+			#{id},
+			#{username},
+			#{password},
+			#{salt},
+			#{user_type},
+			#{realname},
+			#{staff_id},
+			#{id_number},
+			#{sex},
+			#{birth_date,jdbcType=DATE},
+			#{tel},
+			#{email},
+			#{locked},
+            #{register_date,jdbcType=TIMESTAMP},
+			#{reg_id},
+			#{create_by},
+			#{create_dt,jdbcType=TIMESTAMP},
+			#{update_by},
+			#{update_dt,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <update id="update" parameterType="sz.internal.acm.to.UserTO">
+        update tbl_acm_user set 
+			username = #{username},
+			user_type = #{user_type},
+			realname = #{realname},
+			staff_id = #{staff_id},
+			id_number = #{id_number},
+			sex = #{sex},
+			birth_date = #{birth_date,jdbcType=DATE},
+			tel = #{tel},
+			email = #{email},
+			locked = #{locked},
+            register_date = #{register_date,jdbcType=TIMESTAMP},
+			reg_id = #{reg_id},
+			create_by = #{create_by},
+			create_dt = #{create_dt,jdbcType=TIMESTAMP},
+			update_by = #{update_by},
+			update_dt = #{update_dt,jdbcType=TIMESTAMP},
+			version = version + 1
+        where 
+			id = #{id}
+    </update>
+
+    <update id="changePassword" parameterType="sz.internal.acm.to.UserTO">
+        update tbl_acm_user set
+			password = #{password},
+			salt = #{salt},
+			create_by = #{create_by},
+			create_dt = #{create_dt,jdbcType=TIMESTAMP},
+			update_by = #{update_by},
+			update_dt = #{update_dt,jdbcType=TIMESTAMP},
+			version = version + 1
+        where
+			id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="sz.internal.acm.to.UserTO">
+        delete from tbl_acm_user
+        where 
+			id = #{id}
+	</delete>
+
+    <select id="search" parameterType="sz.internal.acm.to.UserTO" resultMap="ResultMap">
+        <if test="!pagination">
+            SELECT 
+			t.id,
+			t.username,
+			t.password,
+			t.salt,
+			t.user_type,
+			t.realname,
+			t.staff_id,
+			t.id_number,
+			t.sex,
+			t.birth_date,
+			t.tel,
+			t.email,
+			t.locked,
+            t.register_date,
+			t.reg_id,
+			t.create_by,
+			t.create_dt,
+			t.update_by,
+			t.update_dt,
+			t.version
+        </if>
+        <if test="pagination">
+            SELECT COUNT(1) AS TOTAL_SIZE
+        </if>
+		FROM tbl_acm_user t
+       	WHERE 1=1
+		<if test="id != null">
+	    	AND t.id = #{id}
+		</if>
+		<if test="username != null and username != ''">
+	    	AND t.username = #{username}
+		</if>
+		<if test="username_like != null and username_like != ''">
+	    	AND t.username like 
+	    	concat("%",REPLACE(REPLACE(REPLACE(REPLACE(#{username_like},"/","//"),"%","/%"),"_","/_"),"[","/["),"%") escape "/"
+		</if>
+		<if test="password != null and password != ''">
+	    	AND t.password = #{password}
+		</if>
+		<if test="salt != null and salt != ''">
+	    	AND t.salt = #{salt}
+		</if>
+		<if test="user_type != null and user_type != ''">
+	    	AND t.user_type = #{user_type}
+		</if>
+		<if test="realname != null and realname != ''">
+	    	AND t.realname = #{realname}
+		</if>
+		<if test="staff_id != null and staff_id != ''">
+	    	AND t.staff_id = #{staff_id}
+		</if>
+		<if test="id_number != null and id_number != ''">
+	    	AND t.id_number = #{id_number}
+		</if>
+		<if test="sex != null and sex != ''">
+	    	AND t.sex = #{sex}
+		</if>
+		<if test="birth_date != null">
+	    	AND t.birth_date = #{birth_date,jdbcType=DATE}
+		</if>
+		<if test="tel != null and tel != ''">
+	    	AND t.tel = #{tel}
+		</if>
+		<if test="email != null and email != ''">
+	    	AND t.email = #{email}
+		</if>
+		<if test="locked != null and locked != ''">
+	    	AND t.locked = #{locked}
+        </if>
+        <if test="register_date != null">
+            AND t.register_date = #{register_date,jdbcType=TIMESTAMP}
+		</if>
+		<if test="reg_id != null">
+	    	AND t.reg_id = #{reg_id}
+		</if>
+		<if test="create_by != null and create_by != ''">
+	    	AND t.create_by = #{create_by}
+		</if>
+		<if test="create_dt != null">
+	    	AND t.create_dt = #{create_dt,jdbcType=TIMESTAMP}
+		</if>
+		<if test="update_by != null and update_by != ''">
+	    	AND t.update_by = #{update_by}
+		</if>
+		<if test="update_dt != null">
+	    	AND t.update_dt = #{update_dt,jdbcType=TIMESTAMP}
+		</if>
+		<if test="version != null">
+	    	AND t.version = #{version}
+		</if>
+        <if test="!pagination">
+            <if test="null!=sortBy and ''!=sortBy ">
+                ORDER BY ${sortBy}  ${sortType}
+            </if>
+        </if>
+    </select>
+
+    <select id="find" parameterType="sz.internal.acm.to.UserTO" resultMap="ResultMap">
+		SELECT 
+			t.id,
+			t.username,
+			t.password,
+			t.salt,
+			t.user_type,
+			t.realname,
+			t.staff_id,
+			t.id_number,
+			t.sex,
+			t.birth_date,
+			t.tel,
+			t.email,
+			t.locked,
+            t.register_date,
+			t.reg_id,
+			t.create_by,
+			t.create_dt,
+			t.update_by,
+			t.update_dt,
+			t.version
+		FROM tbl_acm_user t
+		WHERE 1 = 1 
+		<if test="id != null">
+	    	AND t.id = #{id}
+		</if>
+    </select>
+
+    <select id="findUserByUser_from"  resultMap="ResultMap">
+		SELECT *
+		FROM tbl_acm_user t
+		Where 1 = 1
+		<if test="user_from != null and user_from != ''">
+			AND t.username IN (SELECT user_to from tbl_acm_delegate WHERE
+			user_from = #{user_from})
+		</if>
+		
+	</select>
+
+	<select id="findUserNotUser_from" resultMap="ResultMap">
+		SELECT  *
+		FROM tbl_acm_user t
+		WHERE 1 = 1
+		<if test="user_from != null and user_from != ''">
+			AND t.username NOT IN (SELECT user_to from tbl_acm_delegate WHERE
+			user_from = #{user_from})
+		</if>
+	</select>
+	
+</mapper>

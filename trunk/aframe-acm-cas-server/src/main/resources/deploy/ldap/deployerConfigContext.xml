@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean class="sz.internal.common.SpringContextHolder" lazy-init="false"/>
+
+    <util:map id="authenticationHandlersResolvers">
+        <entry key-ref="proxyAuthenticationHandler" value-ref="proxyPrincipalResolver"/>
+        <!--<entry key-ref="primaryAuthenticationHandler" value-ref="primaryPrincipalResolver"/>-->
+        <entry key-ref="ldapAuthHandler" value-ref="proxyPrincipalResolver"/>
+    </util:map>
+
+    <util:list id="authenticationMetadataPopulators">
+        <ref bean="successfulHandlerMetaDataPopulator"/>
+        <ref bean="rememberMeAuthenticationMetaDataPopulator"/>
+    </util:list>
+
+    <bean id="attributeRepository" class="org.jasig.services.persondir.support.NamedStubPersonAttributeDao"
+          p:backingMap-ref="attrRepoBackingMap"/>
+
+    <!--<alias name="acceptUsersAuthenticationHandler" alias="primaryAuthenticationHandler" />-->
+    <!--<alias name="loginPrimaryAuthenticationHandler" alias="primaryAuthenticationHandler"/>-->
+    <!--<bean id="loginPrimaryAuthenticationHandler"-->
+          <!--class="sz.internal.acm.cas.LoginAcceptUsersAuthenticationHandler">-->
+    <!--</bean>-->
+    <alias name="personDirectoryPrincipalResolver" alias="primaryPrincipalResolver"/>
+
+    <util:map id="attrRepoBackingMap">
+        <entry key="uid" value="uid"/>
+        <entry key="eduPersonAffiliation" value="eduPersonAffiliation"/>
+        <entry key="groupMembership" value="groupMembership"/>
+        <entry>
+            <key>
+                <value>memberOf</value>
+            </key>
+            <list>
+                <value>faculty</value>
+                <value>staff</value>
+                <value>org</value>
+            </list>
+        </entry>
+    </util:map>
+
+    <alias name="serviceThemeResolver" alias="themeResolver"/>
+
+    <alias name="jsonServiceRegistryDao" alias="serviceRegistryDao"/>
+
+    <alias name="defaultTicketRegistry" alias="ticketRegistry"/>
+
+    <alias name="ticketGrantingTicketExpirationPolicy" alias="grantingTicketExpirationPolicy"/>
+    <alias name="multiTimeUseOrTimeoutExpirationPolicy" alias="serviceTicketExpirationPolicy"/>
+
+    <alias name="anyAuthenticationPolicy" alias="authenticationPolicy"/>
+    <alias name="acceptAnyAuthenticationPolicyFactory" alias="authenticationPolicyFactory"/>
+
+    <bean id="auditTrailManager"
+          class="org.jasig.inspektr.audit.support.Slf4jLoggingAuditTrailManager"
+          p:entrySeparator="${cas.audit.singleline.separator:|}"
+          p:useSingleLine="${cas.audit.singleline:false}"/>
+
+    <alias name="neverThrottle" alias="authenticationThrottle"/>
+
+    <util:list id="monitorsList">
+        <ref bean="memoryMonitor"/>
+        <ref bean="sessionMonitor"/>
+    </util:list>
+
+    <alias name="defaultPrincipalFactory" alias="principalFactory"/>
+    <alias name="defaultAuthenticationTransactionManager" alias="authenticationTransactionManager"/>
+    <alias name="defaultPrincipalElectionStrategy" alias="principalElectionStrategy"/>
+    <alias name="tgcCipherExecutor" alias="defaultCookieCipherExecutor"/>
+
+
+    <!--LDAP Authentication Configuration-->
+    <bean id="ldapAuthHandler" class="sz.internal.acm.cas.LoginAcceptUsersAuthenticationHandler"
+          c:authenticator-ref="authenticator">
+    </bean>
+
+    <bean id="authenticator" class="org.ldaptive.auth.Authenticator"
+          c:resolver-ref="dnResolver"
+          c:handler-ref="authHandler"/>
+
+    <bean id="dnResolver" class="org.ldaptive.auth.NoOpDnResolver"/>
+
+    <bean id="authHandler" class="org.ldaptive.auth.PooledBindAuthenticationHandler"
+          p:connectionFactory-ref="pooledLdapConnectionFactory"/>
+
+    <bean id="pooledLdapConnectionFactory"
+          class="org.ldaptive.pool.PooledConnectionFactory"
+          p:connectionPool-ref="connectionPool"/>
+
+    <bean id="connectionPool"
+          class="org.ldaptive.pool.BlockingConnectionPool"
+          init-method="initialize"
+          p:poolConfig-ref="ldapPoolConfig"
+          p:blockWaitTime="3000"
+          p:validator-ref="searchValidator"
+          p:pruneStrategy-ref="pruneStrategy"
+          p:connectionFactory-ref="connectionFactory"/>
+
+    <bean id="ldapPoolConfig" class="org.ldaptive.pool.PoolConfig"
+          p:minPoolSize="3"
+          p:maxPoolSize="10"
+          p:validateOnCheckOut="false"
+          p:validatePeriodically="true"
+          p:validatePeriod="300"/>
+
+    <bean id="connectionFactory" class="org.ldaptive.DefaultConnectionFactory"
+          p:connectionConfig-ref="connectionConfig"/>
+
+    <bean id="connectionConfig" class="org.ldaptive.ConnectionConfig"
+          p:ldapUrl="${acm.ldap.server}"
+          p:connectTimeout="3000"
+          p:useStartTLS="false"
+          p:sslConfig-ref="sslConfig"/>
+
+    <bean id="sslConfig" class="org.ldaptive.ssl.SslConfig">
+        <property name="credentialConfig">
+            <bean class="org.ldaptive.ssl.X509CredentialConfig"
+                  p:trustCertificates="${acm.ldap.server.certificates.path}"/>
+        </property>
+    </bean>
+
+    <bean id="pruneStrategy" class="org.ldaptive.pool.IdlePruneStrategy"
+          p:prunePeriod="300"
+          p:idleTime="600"/>
+
+    <bean id="searchValidator" class="org.ldaptive.pool.SearchValidator"/>
+
+</beans>

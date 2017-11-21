@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sz.internal.common.base.mapper.BaseMapper">
+    <resultMap id="BaseResultMap" type="sz.internal.common.base.to.BaseTO">
+        <id column="id" property="id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+
+        <result column="create_by" property="create_by" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="create_dt" property="create_dt" jdbcType="DATE" javaType="java.sql.Timestamp"/>
+        <result column="update_by" property="update_by" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="update_dt" property="update_dt" jdbcType="DATE" javaType="java.sql.Timestamp"/>
+        <result column="version" property="version" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result column="total_size" property="totalSize"/>
+    </resultMap>
+
+    <select id="truncateTable">
+		truncate table ${tableName}
+	</select>
+	
+	<select id="getTableCount" resultType="java.lang.Integer"> 
+		SELECT count(*) FROM ${tableName};
+	</select>
+</mapper>

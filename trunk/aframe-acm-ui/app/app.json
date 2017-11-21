@@ -1,0 +1,107 @@
+{
+    "index": {
+        "title": "ACM",
+        "script": [
+            "scripts/acm/index.js",
+            "scripts/acm/permission/index.js",
+            "scripts/acm/permission/controllers/index.js",
+            "scripts/acm/permission/controllers/permission.ctrl.js",
+            "scripts/acm/permission/controllers/permission.maintain.ctrl.js",
+            "scripts/acm/permission/filters/index.js",
+            "scripts/acm/permission/services/index.js",
+            "scripts/acm/permission/services/permission.svr.js",
+            "scripts/acm/user/index.js",
+            "scripts/acm/user/controllers/index.js",
+            "scripts/acm/user/controllers/user.ctrl.js",
+            "scripts/acm/user/controllers/user.maintain.ctrl.js",
+            "scripts/acm/user/controllers/user.assign.priv.ctrl.js",
+            "scripts/acm/user/controllers/user.change.password.ctrl.js",
+            "scripts/acm/user/filters/index.js",
+            "scripts/acm/user/services/index.js",
+            "scripts/acm/user/services/user.svr.js",
+            "scripts/acm/application/index.js",
+            "scripts/acm/application/controllers/index.js",
+            "scripts/acm/application/controllers/application.ctrl.js",
+            "scripts/acm/application/controllers/application.maintain.ctrl.js",
+            "scripts/acm/application/filters/index.js",
+            "scripts/acm/application/services/index.js",
+            "scripts/acm/application/services/application.svr.js",
+            "scripts/acm/role/index.js",
+            "scripts/acm/role/controllers/index.js",
+            "scripts/acm/role/controllers/role.ctrl.js",
+            "scripts/acm/role/controllers/role.maintain.ctrl.js",
+            "scripts/acm/role/filters/index.js",
+            "scripts/acm/role/services/index.js",
+            "scripts/acm/role/services/role.svr.js",
+            "scripts/acm/delegate/index.js",
+            "scripts/acm/delegate/controllers/index.js",
+            "scripts/acm/delegate/controllers/delegate.list.ctrl.js",
+            "scripts/acm/delegate/controllers/delegate.maintain.ctrl.js",
+            "scripts/acm/delegate/filters/index.js",
+            "scripts/acm/delegate/services/index.js",
+            "scripts/acm/delegate/services/delegate.svr.js"
+        ],
+        "css": [
+        ]
+    },
+    "app": [
+        "acmUIApp.acm"
+    ],
+    "config": {
+        "acm": {
+            "user": {
+                "list": "json/user/searchUser",
+                "searchPage": "json/user/searchUserPage",
+                "find": "json/user/findUser/",
+                "findByName": "json/user/findUserByName/",
+                "create": "json/user/createUser",
+                "update": "json/user/updateUser",
+                "delete": "json/user/deleteUser/",
+                "findUserWithPriv": "json/user/findUserWithPriv/",
+                "userUnassignedRole": "json/user/userUnassignedRole/",
+                "userUnassignedPermission": "json/user/userUnassignedPermission/",
+                "saveUserPriv": "json/user/saveUserPriv",
+                "findUserByUser_from": "json/user/findUserByUser_from",
+                "findUserNotUser_from": "json/user/findUserNotUser_from",
+                "findUserNotUser_to": "json/user/findUserNotUser_to",
+                "changePassword":"json/user/changePassword"
+            },
+            "permission": {
+                "list": "json/permission/searchPermission",
+                "searchPage": "json/permission/searchPermissionPage",
+                "find": "json/permission/findPermission/",
+                "findByName": "json/permission/findPermissionByName/",
+                "create": "json/permission/createPermission",
+                "update": "json/permission/updatePermission",
+                "delete": "json/permission/deletePermission/"
+            },
+            "role": {
+                "list": "json/role/searchRole",
+                "searchPage": "json/role/searchRolePage",
+                "find": "json/role/findRole/",
+                "roleUnassignedPermission": "json/role/roleUnassignedPermission/",
+                "findByName": "json/role/findRoleByName/",
+                "create": "json/role/createRole",
+                "update": "json/role/updateRole",
+                "delete": "json/role/deleteRole/"
+            },
+            "application": {
+                "list": "json/application/searchApplication",
+                "searchPage": "json/application/searchApplicationPage",
+                "find": "json/application/findApplication/",
+                "create": "json/application/createApplication",
+                "update": "json/application/updateApplication",
+                "delete": "json/application/deleteApplication/",
+                "findByAppId": "json/application/findAppByAppId/"
+            },
+            "delegate": {
+                "list": "json/delegate/searchDelegate",
+                "findDelegateUserFrom": "json/delegate/findDelegateUserFrom",
+                "create": "json/delegate/createDelegate",
+                "update": "json/delegate/updateDelegate",
+                "delete": "json/delegate/deleteDelegate/",
+                "find": "json/delegate/findDelegate/"
+            }
+        }
+    }
+}

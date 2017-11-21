@@ -1,0 +1,32 @@
+{
+  "author": "wanggang@ncsi.com.cn",
+  "name": "aframe-components-ext",
+  "keywords": [
+    "aframe",
+    "ext"
+  ],
+  "license": "MIT",
+  "ignore": [],
+  "description": "aframe extension components module",
+  "version": "0.0.1",
+  "main": [
+    "./css/aframe-ext.css",
+    "./js/aframe-ext.js"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "angular": "1.4.6",
+    "bootstrap": "3.3.5",
+    "bootstrap-hover-dropdown": "2.0.3",
+    "slimScroll": "jquery-slimscroll#~1.3.6"
+  },
+  "_release": "0.0.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.0.1",
+    "commit": "67e5bdf7706c1f769b2c3f885bdd6b2fa75dd307"
+  },
+  "_source": "http://user:user@10.176.51.22/aframe_components_ext.git",
+  "_target": "~0.0.1",
+  "_originalSource": "aframe-components-ext"
+}

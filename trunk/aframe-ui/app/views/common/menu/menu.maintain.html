@@ -1,0 +1,88 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">
+            <span ng-show="menu.id" i18n="aframeUIApp.label_edit_menu"/>
+            <span ng-hide="menu.id" i18n="aframeUIApp.label_create_menu"/>
+        </h3>
+    </div>
+
+    <div class="col-lg-12">
+        <ic-form-legend/>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <form name="menuForm" class="form-horizontal">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ic-form-group>
+                        <div class="col-md-2">
+                            <label class="control-label"><span i18n="aframeUIApp.label_menu_caption"/></label>
+                            <ic-required-mark/>
+                        </div>
+                        <div class="col-md-10">
+                            <input type="text" ic-input-clear class="form-control" ng-model="menu.caption" validator="[required]" validator-group="menu" maxlength="100"/>
+                        </div>
+                    </ic-form-group>
+                    <ic-form-group>
+                        <div class="col-md-2">
+                            <label class="control-label"><span i18n="aframeUIApp.label_menu_style"/></label>
+                        </div>
+                        <div class="col-md-10">
+                            <input type="text" ic-input-clear class="form-control" ng-model="menu.style" maxlength="50"/>
+                        </div>
+                    </ic-form-group>
+                    <ic-form-group>
+                        <div class="col-md-2">
+                            <label class="control-label"><span i18n="aframeUIApp.label_menu_url"/></label>
+                        </div>
+                        <div class="col-md-10">
+                            <input type="text" ic-input-clear class="form-control" ng-model="menu.url" maxlength="500"/>
+                        </div>
+                    </ic-form-group>
+                    <ic-form-group>
+                        <div class="col-md-2">
+                            <label class="control-label"><span i18n="aframeUIApp.label_menu_permission"/></label>
+                        </div>
+                        <div class="col-md-10">
+                            <input type="text" ic-input-clear class="form-control" ng-model="menu.permission" maxlength="200"/>
+                        </div>
+                    </ic-form-group>
+                    <ic-form-group>
+                        <div class="col-md-2">
+                            <label class="control-label"><span i18n="aframeUIApp.label_menu_available"/></label>
+                            <ic-required-mark/>
+                        </div>
+                        <div class="col-md-10">
+                            <label class="radio-inline" ng-repeat="code_item in yes_no_code">
+                                <input type="radio" ng-model="menu.available" value="{{code_item.code_id}}" checked validator="[required]" validator-group="menu">{{code_item.code_desc}}
+                            </label>
+                        </div>
+                    </ic-form-group>
+                    <ic-form-group>
+                        <div class="col-md-2">
+                            <label class="control-label"><span i18n="aframeUIApp.label_menu_seq_no"/></label>
+                            <ic-required-mark/>
+                        </div>
+                        <div class="col-md-10">
+                            <input type="text" ic-input-clear class="form-control" ng-model="menu.seq_no" validator="[required]" validator-group="menu" maxlength="10"/>
+                        </div>
+                    </ic-form-group>
+                </div>
+            </div>
+            <br/>
+
+            <div class="row">
+                <div class="col-md-10 col-md-offset-2">
+                    <div class="text-left">
+                        <a class="btn btn-primary" ng-click="actions.submit()" ng-show="menu.id"><i class="fa fa-save"></i> <span i18n="aframe.button_update"/></a>
+                        <a class="btn btn-primary" ng-click="actions.submit()" ng-hide="menu.id"><i class="fa fa-save"></i> <span i18n="aframe.button_save"/></a>&nbsp;&nbsp;
+                        <a class="btn btn-info" ng-click="actions.reset()"><i class="fa fa-reply"></i> <span i18n="aframe.button_reset"/></a>&nbsp;&nbsp;
+                        <a class="btn btn-warning" ng-click="actions.cancel()"><i class="fa fa-ban"></i> <span i18n="aframe.button_cancel"/></a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

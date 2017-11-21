@@ -1,0 +1,83 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">
+            <span ng-show="permission.id" i18n="acmUIApp.label_edit_permission"/>
+            <span ng-hide="permission.id" i18n="acmUIApp.label_create_permission"/>  - {{app.name}}
+        </h3>
+    </div>
+
+    <div class="col-lg-12">
+        <ic-form-legend/>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <form name="permissionForm" class="form-horizontal">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ic-form-group>
+                        <div class="col-md-2">
+                            <label class="control-label"><span i18n="acmUIApp.label_permission_name"/></label>
+                            <ic-required-mark/>
+                        </div>
+                        <div class="col-md-10">
+                            <input type="text" ic-input-clear class="form-control" ng-model="permission.name"
+                                   validator="[required]" validator-group="permission"
+                                   maxlength="100"/>
+                        </div>
+                    </ic-form-group>
+                    <ic-form-group>
+                        <div class="col-md-2">
+                            <label class="control-label"><span i18n="acmUIApp.label_permission_url"/></label>
+                        </div>
+                        <div class="col-md-10">
+                            <input type="text" ic-input-clear class="form-control" ng-model="permission.url"
+                                   maxlength="100"/>
+                        </div>
+                    </ic-form-group>
+                    <ic-form-group>
+                        <div class="col-md-2">
+                            <label class="control-label"><span i18n="acmUIApp.label_permission_request_method"/></label>
+                        </div>
+                        <div class="col-md-10">
+                            <select class="form-control" ng-model="permission.request_method" style="width: 100px">
+                                <option value="*">*</option>
+                                <option value="PUT">PUT</option>
+                                <option value="POST">POST</option>
+                                <option value="GET">GET</option>
+                                <option value="DELETE">DELETE</option>
+                            </select>
+                        </div>
+                    </ic-form-group>
+                    <ic-form-group>
+                        <div class="col-md-2">
+                            <label class="control-label"><span i18n="acmUIApp.label_permission_permission"/></label>
+                        </div>
+                        <div class="col-md-10">
+                            <input type="text" ic-input-clear class="form-control" ng-model="permission.permission"
+                                   maxlength="100"/>
+                        </div>
+                    </ic-form-group>
+
+                </div>
+            </div>
+            <br/>
+
+            <div class="row">
+                <div class="col-md-10 col-md-offset-2">
+                    <div class="text-left">
+                        <a class="btn btn-primary" ng-click="actions.submit()" ng-show="permission.id">
+                            <i class="fa fa-save"></i> <span i18n="aframe.button_update"/></a>
+                        <a class="btn btn-primary" ng-click="actions.submit()" ng-hide="permission.id">
+                            <i class="fa fa-save"></i> <span i18n="aframe.button_save"/></a>&nbsp;&nbsp;
+                        <a class="btn btn-info" ng-click="actions.reset()"><i class="fa fa-reply"></i>
+                            <span i18n="aframe.button_reset"/></a>&nbsp;&nbsp;
+                        <a class="btn btn-warning" ng-click="actions.cancel()"><i class="fa fa-ban"></i>
+                            <span i18n="aframe.button_cancel"/></a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

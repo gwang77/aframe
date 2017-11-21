@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+                        http://www.springframework.org/schema/context
+                        http://www.springframework.org/schema/context/spring-context-4.2.xsd
+                        http://www.springframework.org/schema/mvc
+                        http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
+
+
+    <!-- auto scan @controller -->
+    <context:component-scan base-package="sz.internal"/>
+
+    <mvc:default-servlet-handler/>
+    <mvc:annotation-driven/>
+
+    <!--CORS configuration-->
+    <!--This is for test, for detail configuration, can follow the comment configuration-->
+    <mvc:cors>
+        <mvc:mapping path="/**"
+                     allowed-origins="*"
+                     allowed-methods="GET, PUT, POST, DELETE, OPTIONS"
+                     allowed-headers="Origin, X-Requested-With, Content-Type, Accept"
+        />
+    </mvc:cors>
+    <!--<mvc:cors>-->
+        <!--<mvc:mapping path="/api/**"-->
+                     <!--allowed-origins="http://domain1.com, http://domain2.com"-->
+                     <!--allowed-methods="GET, PUT"-->
+                     <!--allowed-headers="header1, header2, header3"-->
+                     <!--exposed-headers="header1, header2" allow-credentials="false"-->
+                     <!--max-age="123" />-->
+        <!--<mvc:mapping path="/resources/**"-->
+                     <!--allowed-origins="http://domain1.com" />-->
+    <!--</mvc:cors>-->
+
+    <mvc:interceptors>
+        <!-- session -->
+        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"/>
+    </mvc:interceptors>
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>
+    <!-- End of localization-->
+
+    <!--avoid IE execute AJAX, return JSON download-->
+    <bean id="mappingJacksonHttpMessageConverter"
+          class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>text/html;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- start SpringMVC annotation-->
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <ref bean="mappingJacksonHttpMessageConverter"/>
+            </list>
+        </property>
+    </bean>
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!-- upload -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="utf-8"/>
+        <property name="maxUploadSize" value="10485760000"/>
+        <property name="maxInMemorySize" value="40960"/>
+    </bean>
+
+    <!--Format-->
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean"/>
+
+</beans>

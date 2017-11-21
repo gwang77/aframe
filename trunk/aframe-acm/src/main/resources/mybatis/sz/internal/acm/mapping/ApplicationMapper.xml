@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sz.internal.acm.mapper.ApplicationMapper">
+
+    <resultMap id="ResultMap" type="sz.internal.acm.to.ApplicationTO" extends="sz.internal.common.base.mapper.BaseMapper.BaseResultMap">
+        <result column="app_id" property="app_id"/>
+        <result column="name" property="name"/>
+        <result column="base_url" property="base_url"/>
+        <result column="locked" property="locked"/>
+    </resultMap>
+    
+    <insert id="insert" parameterType="sz.internal.acm.to.ApplicationTO" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_acm_application (
+			id,
+			app_id,
+			name,
+			base_url,
+			locked,
+			create_by,
+			create_dt,
+			update_by,
+			update_dt
+        ) values (
+			#{id},
+			#{app_id},
+			#{name},
+			#{base_url},
+			#{locked},
+			#{create_by},
+			#{create_dt,jdbcType=TIMESTAMP},
+			#{update_by},
+			#{update_dt,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <update id="update" parameterType="sz.internal.acm.to.ApplicationTO">
+        update tbl_acm_application set 
+			app_id = #{app_id},
+			name = #{name},
+			base_url = #{base_url},
+			locked = #{locked},
+			create_by = #{create_by},
+			create_dt = #{create_dt,jdbcType=TIMESTAMP},
+			update_by = #{update_by},
+			update_dt = #{update_dt,jdbcType=TIMESTAMP},
+			version = version + 1
+        where 
+			id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="sz.internal.acm.to.ApplicationTO">
+        delete from tbl_acm_application
+        where 
+			id = #{id}
+	</delete>
+
+    <select id="search" parameterType="sz.internal.acm.to.ApplicationTO" resultMap="ResultMap">
+        <if test="!pagination">
+            SELECT 
+			t.id,
+			t.app_id,
+			t.name,
+			t.base_url,
+			t.locked,
+			t.create_by,
+			t.create_dt,
+			t.update_by,
+			t.update_dt,
+			t.version
+        </if>
+        <if test="pagination">
+            SELECT COUNT(1) AS TOTAL_SIZE
+        </if>
+		FROM tbl_acm_application t
+       	WHERE 1=1
+		<if test="id != null">
+	    	AND t.id = #{id}
+		</if>
+		<if test="app_id != null and app_id != ''">
+	    	AND t.app_id = #{app_id}
+		</if>
+		<if test="name != null and name != ''">
+	    	AND t.name = #{name}
+		</if>
+		<if test="name_like != null and name_like != ''">
+	    	AND t.name like
+	    	concat("%",REPLACE(REPLACE(REPLACE(REPLACE(#{name_like},"/","//"),"%","/%"),"_","/_"),"[","/["),"%") escape "/"
+		</if>
+		<if test="base_url != null and base_url != ''">
+	    	AND t.base_url = #{base_url}
+		</if>
+		<if test="locked != null and locked != ''">
+	    	AND t.locked = #{locked}
+		</if>
+		<if test="create_by != null and create_by != ''">
+	    	AND t.create_by = #{create_by}
+		</if>
+		<if test="create_dt != null">
+	    	AND t.create_dt = #{create_dt,jdbcType=TIMESTAMP}
+		</if>
+		<if test="update_by != null and update_by != ''">
+	    	AND t.update_by = #{update_by}
+		</if>
+		<if test="update_dt != null">
+	    	AND t.update_dt = #{update_dt,jdbcType=TIMESTAMP}
+		</if>
+		<if test="version != null">
+	    	AND t.version = #{version}
+		</if>
+        <if test="!pagination">
+            <if test="null!=sortBy and ''!=sortBy ">
+                ORDER BY ${sortBy}  ${sortType}
+            </if>
+        </if>
+    </select>
+
+    <select id="find" parameterType="sz.internal.acm.to.ApplicationTO" resultMap="ResultMap">
+		SELECT 
+			t.id,
+			t.app_id,
+			t.name,
+			t.base_url,
+			t.locked,
+			t.create_by,
+			t.create_dt,
+			t.update_by,
+			t.update_dt,
+			t.version
+		FROM tbl_acm_application t
+		WHERE 1 = 1 
+		<if test="id != null">
+	    	AND t.id = #{id}
+		</if>
+    </select>
+
+</mapper>

@@ -1,0 +1,45 @@
+{
+  "author": "wanggang@ncsi.com.cn",
+  "name": "aframe-components",
+  "keywords": [
+    "aframe"
+  ],
+  "license": "MIT",
+  "ignore": [],
+  "description": "aframe main module, with component/service/interceptor/validator...",
+  "version": "0.0.1",
+  "main": [
+    "./css/aframe.css",
+    "./js/aframe.js",
+    "./js/aframe-interceptors.js",
+    "./js/aframe-templates.js",
+    "./js/aframe-components.js",
+    "./js/aframe-services.js",
+    "./js/aframe-validator-rules.js"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "angular": "1.4.6",
+    "angular-touch": "1.4.6",
+    "angular-cookies": "1.4.6",
+    "angular-validator": "~0.2.6",
+    "angular-localization": "^1.2.1",
+    "bootstrap": "3.3.5",
+    "bootstrap-datepicker": "~1.6.0",
+    "underscore": "~1.8.3",
+    "font-awesome": "4.3.0",
+    "metisMenu": "~1.1.3",
+    "blockUI": "blockui#*",
+    "toastr": "~2.1.2",
+    "bootbox.js": "~4.4.0"
+  },
+  "_release": "0.0.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.0.1",
+    "commit": "f50ea84675aed0b03a385757297d4fa7e03507a9"
+  },
+  "_source": "http://user:user@10.176.51.22/aframe_components.git",
+  "_target": "~0.0.1",
+  "_originalSource": "aframe-components"
+}

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+        version="2.0">
+    <tlib-version>1.0</tlib-version>
+    <short-name>common</short-name>
+    <!--Message Shown-->
+    <function>
+        <description>Show Single Message</description>
+        <name>msgConvert</name>
+        <function-class>sz.internal.common.util.MessageUtil</function-class>
+        <function-signature>java.lang.String getLocaleMessage(java.lang.String)</function-signature>
+        <example>${common:msgConvert(str)}</example>
+    </function>
+    <function>
+        <description>Show Multi Message</description>
+        <name>msgConvertAll</name>
+        <function-class>sz.internal.common.util.MessageUtil</function-class>
+        <function-signature>java.lang.String[] getLocaleMessages(java.lang.String[])</function-signature>
+        <example>${common:msgConvertAll(strArr)}</example>
+    </function>
+
+    <!--Code Desc-->
+    <function>
+        <description>Get Code Descriptions</description>
+        <name>codeDescs</name>
+        <function-class>sz.internal.common.component.code.CodeMgr</function-class>
+        <function-signature>java.util.List searchCodeTO(java.lang.String,java.lang.String)</function-signature>
+        <example>${common:codeDescs(codeType,locale)}</example>
+    </function>
+    <function>
+        <description>Get Filter Code Descriptions</description>
+        <name>codeFilterDescs</name>
+        <function-class>sz.internal.common.component.code.CodeMgr</function-class>
+        <function-signature>java.util.List searchCodeTOFilter(java.lang.String,java.lang.String,java.lang.String,java.lang.String)</function-signature>
+        <example>${common:codeFilterDescs(codeType,locale,id_prefix,id_suffix)}</example>
+    </function>
+    
+    <function>
+        <description>Follow ID Get Code Descriptions</description>
+        <name>codeDesc</name>
+        <function-class>sz.internal.common.component.code.CodeMgr</function-class>
+        <function-signature>java.lang.String getCodeDesc(java.lang.String,java.lang.String,java.lang.String)</function-signature>
+        <example>${common:codeDesc(codetype_id,value,locale)}</example>
+    </function>
+
+    <!--HTML code-->
+    <function>
+        <description>Handle HTML Code</description>
+        <name>htmlEncode</name>
+        <function-class>sz.internal.common.util.HTMLUtil</function-class>
+        <function-signature>java.lang.String htmlEncode(java.lang.String)</function-signature>
+        <example>${common:htmlEncode(str)}</example>
+    </function>
+    <function>
+        <description>encodeBase64</description>
+        <name>encodeBase64</name>
+        <function-class>sz.internal.common.util.HTMLUtil</function-class>
+        <function-signature>java.lang.String encodeBase64(byte[])</function-signature>
+        <example>${common:encodeBase64(bts)}</example>
+    </function>
+
+</taglib>

@@ -1,0 +1,57 @@
+{
+  "welcome": "Welcome, %name",
+  "label_options": "Options",
+  "label_menu_error_page": "Error Page",
+  "label_menu_home": "Home",
+  "label_menu_menu": "Menu",
+  "label_maintain_menu": "Maintain Menu",
+  "label_create_menu": "Create Menu",
+  "label_edit_menu": "Edit Menu",
+  "label_menu_caption": "Caption",
+  "label_menu_style": "Style",
+  "label_menu_url": "URL",
+  "label_menu_permission": "Permission",
+  "label_menu_available": "Available",
+  "label_menu_seq_no": "Seq No",
+  "label_menu_parent_id": "Parent ID",
+  "label_last_blank": "",
+
+  "label_menu_code": "Code",
+  "label_menu_code_codetype": "CodeType",
+  "label_menu_code_codeint": "CodeInt",
+
+  "label_code_codetype_title": "CodeType List",
+  "label_code_codeInt_title": "CodeInt List",
+
+  "label_operation": "Operation",
+
+  "label_codetype_id": "CodeType Id",
+  "label_codetype_desc": "CodeType Desc",
+  "label_codeint_id": "CodeInt Id",
+  "label_codeint_desc": "CodeInt Desc",
+  "label_codeint_status": "Status",
+  "label_codeint_locales": "Locales",
+  "label_codeint_seq": "Seq",
+
+  "label_code_codetype_update_title": "Update CodeType",
+  "label_code_codetype_create_title": "Create CodeType",
+  "label_code_codeint_update_title": "Update CodeInt",
+  "label_code_codeint_create_title": "Create CodeInt",
+
+  "label_menu_audit_log": "Audit Log",
+  "label_object_name":"Object name",
+  "label_action":"Action",
+  "label_audit_date":"Audit Date",
+  "label_before":"Before",
+  "label_after":"After",
+  "label_detail":"Detail",
+  "label_object_field":"Field",
+  "label_from":"From",
+  "label_to":"To",
+
+  "label_statistic_statistic":"Statistic",
+  "label_statistic_statisticManage":"Statistic Manage",
+  "label_statistic_desc":"Function",
+  "label_statistic_count":"Count",
+  "label_statistic_countUser":"User Count"
+}

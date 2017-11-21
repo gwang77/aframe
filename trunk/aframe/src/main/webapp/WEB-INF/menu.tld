@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+        version="2.0">
+    <tlib-version>1.0</tlib-version>
+    <short-name>menu</short-name>
+    <!--Menu code-->
+    <function>
+        <description>Show menus</description>
+        <name>showMenu</name>
+        <function-class>sz.internal.common.component.menu.MenuMgr</function-class>
+        <function-signature>sz.internal.common.component.menu.to.MenuTO showMenu(java.lang.String)</function-signature>
+        <example>${common:showMenu(java.lang.String)}</example>
+    </function>
+
+    <function>
+        <description>Show directory</description>
+        <name>showDirectory</name>
+        <function-class>sz.internal.common.component.menu.MenuMgr</function-class>
+        <function-signature>sz.internal.common.component.menu.to.MenuTO showDirectory(java.lang.String)</function-signature>
+        <example>${common:showDirectory(java.lang.String)}</example>
+    </function>
+
+
+</taglib>
